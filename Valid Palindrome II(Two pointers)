@@ -1,0 +1,35 @@
+https://leetcode.com/problems/valid-palindrome-ii/
+
+Solution:
+
+class Solution:
+    def validPalindrome(self, s: str) -> bool:
+        
+        if not s:
+            return false
+        
+        left, right = 0, len(s) - 1
+        
+        while left < right:
+            if s[left] == s[right]:
+                left, right = left + 1, right - 1
+            else:
+                return self.isPalindrome(s, left + 1, right) or self.isPalindrome(s, left, right - 1)
+        
+        return True
+            
+    
+    def isPalindrome(self, s: str, left: int, right: int):
+        
+        if not s:
+            return False
+        
+        while left < right:
+            if s[left].lower() == s[right].lower():
+                left, right = left + 1, right - 1
+            else:
+                return False
+            
+        return True
+            
+
