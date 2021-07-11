@@ -1,0 +1,56 @@
+https://leetcode.com/problems/sort-an-array/
+
+Solution:
+
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        
+        if not nums:
+            return []
+        
+        temp = [0] * len(nums)
+    
+        self.merge_sort(nums, 0, len(nums) - 1, temp)
+        return nums
+    
+    def merge_sort(self, nums: List[int], start: int, end: int, temp: List[int]):
+        
+        if start >= end:
+            return
+        
+        self.merge_sort(nums, start, (start + end) // 2, temp)
+        self.merge_sort(nums, (start + end) // 2 + 1, end, temp)
+        self.merge(nums, start, end, temp)       
+        
+    def merge(self, nums: List[int], start: int, end: int, temp: List[int]):
+        
+        if start >= end:
+            return
+        
+        middle = (start + end) // 2
+        index = start
+        left = start
+        right = middle + 1
+        
+        while left <= middle and right <= end:
+            if nums[left] < nums[right]:
+                temp[index] = nums[left]
+                index += 1
+                left += 1
+            else:
+                temp[index] = nums[right]
+                index += 1
+                right += 1
+            
+        while left <= middle:
+                temp[index] =  nums[left]
+                index += 1
+                left += 1
+                
+        while right <= end:
+                temp[index] = nums[right]
+                index += 1
+                right += 1
+            
+        for i in range(start, end + 1):
+                nums[i] = temp[i]
