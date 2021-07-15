@@ -1,0 +1,31 @@
+https://leetcode.com/problems/permutations/
+
+Solution:
+
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        
+        if not nums:
+            return [[]]
+        
+        results = []
+        visited = set()
+        
+        self.dfs(nums, [], set(), results)
+        return results;
+    
+    def dfs(self, nums: List[int], current_result: List[int], visited: set(), results: List[int]):
+        
+        if len(current_result) == len(nums):
+            results.append(list(current_result))
+            return
+            
+        for num in nums:            
+            if num in visited:
+                continue
+            current_result.append(num)
+            visited.add(num)
+            self.dfs(nums, current_result, visited, results)
+            visited.remove(num)
+            current_result.pop()
+            
