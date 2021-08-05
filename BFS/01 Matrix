@@ -1,0 +1,27 @@
+https://leetcode.com/problems/01-matrix/
+
+Solution: use 0 to set distance for 1
+
+class Solution:
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        
+        DIREDTIONS = [(1, 0), (0, -1), (-1, 0), (0, 1)]       
+        queue = deque()
+        n, m = len(mat), len(mat[0])
+        visited = set()
+        
+        for i in range(len(mat)):
+            for j in range(len(mat[0])):
+                if mat[i][j] == 0:
+                    queue.append((i, j, 0))
+                    visited.add((i, j))        
+        
+        while queue:         
+            x, y, count = queue.popleft()
+            for delta_x, delta_y in DIREDTIONS:
+                next_x, next_y = x + delta_x, y + delta_y
+                if 0 <= next_x < n and  0 <= next_y < m and (next_x, next_y) not in visited:
+                    mat[next_x][next_y] = count + 1
+                    queue.append((next_x, next_y, count + 1))
+                    visited.add((next_x, next_y))       
+        return mat        
