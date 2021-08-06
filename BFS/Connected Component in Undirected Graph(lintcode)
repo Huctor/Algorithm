@@ -1,0 +1,45 @@
+https://www.lintcode.com/problem/431/description
+
+Solution:
+
+"""
+class UndirectedGraphNode:
+     def __init__(self, x):
+         self.label = x
+         self.neighbors = []
+"""
+
+class Solution:
+    """
+    @param nodes: a array of Undirected graph node
+    @return: a connected set of a Undirected graph
+    """
+    def connectedSet(self, nodes):
+        # write your code here
+
+        if not nodes:
+            return []
+
+        visited = set()
+        results, level = [], []
+
+        for node in nodes:
+            if node in visited:
+                continue
+            queue = collections.deque([node])
+
+            while queue:
+                cur_node = queue.popleft()
+                visited.add(cur_node)
+                level.append(cur_node.label)
+
+                if len(cur_node.neighbors) > 0:
+                    for neighbor_node in cur_node.neighbors:
+                        if neighbor_node not in visited:
+                            queue.append(neighbor_node)
+                            visited.add(neighbor_node)
+            level.sort()
+            results.append(level)
+            level = []
+        
+        return results
