@@ -15,7 +15,6 @@ class Solution:
 
         results = []
         self.dfs(n, 2, results, [])
-        print(results)
         return results
     
     def dfs(self, n, index, results, current_list):
@@ -23,7 +22,6 @@ class Solution:
         if len(current_list) != 0:
             current_list.append(n)           
             results.append(current_list[:])
-            print(results)
             current_list.pop()
             
 
@@ -32,4 +30,10 @@ class Solution:
                 current_list.append(i)
                 self.dfs(int(n / i), i, results, current_list)
                 current_list.pop()
+        
+
+
+
+
+
         
