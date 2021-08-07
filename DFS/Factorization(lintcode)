@@ -1,0 +1,35 @@
+https://www.lintcode.com/problem/652/
+
+Solution:
+
+class Solution:
+    """
+    @param n: An integer
+    @return: a list of combination
+    """
+    def getFactors(self, n):
+        # write your code here
+
+        if n <= 1:
+            return []
+
+        results = []
+        self.dfs(n, 2, results, [])
+        print(results)
+        return results
+    
+    def dfs(self, n, index, results, current_list):
+
+        if len(current_list) != 0:
+            current_list.append(n)           
+            results.append(current_list[:])
+            print(results)
+            current_list.pop()
+            
+
+        for i in range(index, int(math.sqrt(n)) + 1):
+            if n % i == 0:
+                current_list.append(i)
+                self.dfs(int(n / i), i, results, current_list)
+                current_list.pop()
+        
