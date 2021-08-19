@@ -1,0 +1,44 @@
+https://leetcode.com/problems/generate-parentheses/
+
+Solution:
+
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        
+        results = []
+        
+        length = n
+        
+        self.dfs('', n, n, results, length)
+        
+        return results
+    
+    def dfs(self, current_level: str, left: int, right: int, results: List[str], length: int):
+                      
+            if left < 0 or right < 0:
+                return
+                
+            if left == 0 and right == 0 and len(current_level) == 2 * length:
+                
+                if current_level not in results:
+                    results.append(current_level)
+                    return results
+                return
+            
+            if left == right:
+                current_level = current_level + '('
+                left -= 1
+                self.dfs(current_level, left, right, results, length)
+           
+            if left <= right:
+                current_level = current_level + '('
+                left -= 1
+                self.dfs(current_level, left, right, results, length)
+                current_level = current_level[:-1]
+                left += 1
+                
+                current_level = current_level + ')'
+                right -= 1
+                self.dfs(current_level, left, right, results, length)
+                current_level = current_level[:-1]
+                right += 1
