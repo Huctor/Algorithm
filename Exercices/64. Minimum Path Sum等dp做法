@@ -1,0 +1,42 @@
+https://leetcode.com/problems/minimum-path-sum/
+
+Solution: DFS + memory记忆化搜索
+
+class Solution:
+    def minPathSum(self, grid: List[List[int]]) -> int:
+        
+        results = []
+        memo = {}
+        self.dfs(0, 0, results, grid, 0, memo)
+        return memo[(0, 0)]
+        
+    
+    def dfs(self, x: int, y: int, results: List[int], grid: List[List[int]], sum:int, memo: {}) -> int:
+        costLeft, costRight = sys.maxsize, sys.maxsize
+        
+        if (x, y) in memo:
+            return memo[(x, y)]
+        
+        
+        if x == len(grid) - 1 and y == len(grid[0]) - 1:            
+            memo[(x, y)] = grid[x][y]
+            return grid[x][y]
+          
+        if 0 <= x + 1 < len(grid) and 0 <= y < len(grid[0]):
+            costLeft = self.dfs(x + 1, y, results, grid, sum, memo)
+            
+        if 0 <= x < len(grid) and 0 <= y + 1 < len(grid[0]):
+            costRight = self.dfs(x, y + 1, results, grid, sum, memo)
+            
+        memo[(x, y)] = min(costLeft, costRight) + grid[x][y]
+        
+        return memo[(x, y)]
+            
+        
+        
+                
+            
+            
+            
+            
+            
