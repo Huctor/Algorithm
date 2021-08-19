@@ -25,10 +25,10 @@ class Solution:
                     return results
                 return
             
-            if left == right:
+            if len(current_level) == 0:
                 current_level = current_level + '('
                 left -= 1
-                self.dfs(current_level, left, right, results, length)
+                
            
             if left <= right:
                 current_level = current_level + '('
