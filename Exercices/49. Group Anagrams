@@ -1,0 +1,19 @@
+https://leetcode.com/problems/group-anagrams/
+
+Solution: 利用排序后的字符串作为字典的key, 字典的值为列表
+
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        
+        dic = {}
+        
+        for word in strs:
+            
+            wordSorted = "".join(sorted(word))
+            
+            if wordSorted in dic:
+                dic[wordSorted].append(word)
+            else:
+                dic[wordSorted] = [word]
+        
+        return list(dic.values())
