@@ -1,0 +1,22 @@
+https://leetcode.com/problems/find-pivot-index/
+
+Solution: 计算总和，判断总和减去到左边是否为到右边的和
+
+class Solution:
+    def pivotIndex(self, nums: List[int]) -> int:
+        
+        #Calculate sum of nums 
+        sumTotal = sum(nums)
+        
+        #Set 0 to sum from left
+        sumLeft = 0
+        
+        for i in range(0, len(nums)):
+            
+            sumLeft += nums[i]
+            #If sum of nums minus sum from left plus value in i position equels sum from left, then return i
+            if sumLeft == sumTotal - sumLeft + nums[i]:
+                return i
+        
+        return -1
+
