@@ -1,0 +1,45 @@
+https://leetcode.com/problems/break-a-palindrome/
+
+Solution:
+
+class Solution:
+    def breakPalindrome(self, palindrome: str) -> str:
+        
+        #I palindrome length is less than 1, then return ""
+        if len(palindrome) <= 1:
+            return ""
+        
+        #Convert string to list
+        listPalindrome = list(palindrome)
+        
+        start, end = 0, len(listPalindrome) - 1
+        
+        while start < end:
+            
+            if listPalindrome[start] == "a" and listPalindrome[end] == "a":
+                start += 1
+                end -= 1
+                continue
+            
+            listPalindrome[start] = "a"
+            break              
+        
+        if start == end:
+            #listPalindrome is 3, this is a special case
+            if len(listPalindrome) == 3:
+                listPalindrome[start + 1] = "b"
+                return ''.join(listPalindrome)
+            #Set last character in the string
+            if ord(listPalindrome[len(listPalindrome) - 1]) >= ord("b"):
+                listPalindrome[len(listPalindrome) - 1] = "a"
+            else:
+                listPalindrome[len(listPalindrome) - 1] = "b"
+                
+        if start != end and listPalindrome[start] == listPalindrome[end]:
+            #Set last character in the string
+            if ord(listPalindrome[len(listPalindrome) - 1]) >= ord("b"):
+                listPalindrome[len(listPalindrome) - 1] = "a"
+            else:
+                listPalindrome[len(listPalindrome) - 1] = "b"
+        
+        return ''.join(listPalindrome)
