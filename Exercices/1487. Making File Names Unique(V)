@@ -1,0 +1,37 @@
+https://leetcode.com/problems/making-file-names-unique/
+
+Solution: 用字典存每个单词和每个单词出现的次数
+
+class Solution:
+    def getFolderNames(self, names: List[str]) -> List[str]:
+        
+        if not names:
+            return names
+        
+        namesDic = {}
+        resultList = []
+        
+        for nameString in names:
+            
+            #If name is not in dictionary, then add it
+            if nameString not in namesDic:
+                namesDic[nameString] = 1
+                resultList.append(nameString)
+                continue
+            
+            if nameString in namesDic:
+            
+                #If nameString exists, then and '(' + number of nameString + ')'
+                newCountNumber = namesDic[nameString]             
+                newNameString = nameString + '(' + str(newCountNumber) + ')'
+                
+                #Increase number of newNameString to chech if newNameString exists in namesDic
+                while newNameString in namesDic:
+                    newCountNumber += 1
+                    newNameString = nameString + '(' + str(newCountNumber) + ')'
+                
+                resultList.append(newNameString)
+                namesDic[nameString] += 1              
+                namesDic[newNameString] = 1
+                
+        return resultList
