@@ -1,0 +1,49 @@
+https://leetcode.com/problems/max-consecutive-ones-iii/
+
+Solution: 注意k为0和非0
+
+class Solution:
+    def longestOnes(self, nums: List[int], k: int) -> int:
+        
+        length = len(nums)
+        left, right = 0, 0
+        longest = 0
+        countZero = 0
+        
+        #If k equels 0, calculate length of 1
+        currentLength = set()
+        if k == 0:
+            while right < length:
+                if nums[right] == 1:
+                    longest += 1
+                elif nums[right] == 0:
+                    currentLength.add(longest)
+                    longest = 0
+                right += 1
+            if longest != 0:
+                currentLength.add(longest)
+            return max(currentLength)
+        
+        #If K not equals 0, calculate max length of k' 0
+        while right < length:            
+            if nums[right] == 0:
+                countZero += 1
+                if countZero <= k:
+                    right += 1
+                    continue
+                else:
+                    longest = max(longest, right - left)
+                    while nums[left] != 0:
+                        left += 1
+                    left += 1
+                    right += 1
+                    countZero -= 1 
+                    continue
+            
+            right += 1
+            
+        if right == length and countZero <= k:
+            longest = max(longest, right - left)
+        
+        return longest
+                
