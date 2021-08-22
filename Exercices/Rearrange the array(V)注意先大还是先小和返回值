@@ -1,0 +1,21 @@
+https://practice.geeksforgeeks.org/problems/rearrange-the-array5802/1#
+
+Solution: 注意先大还是先小和返回值
+
+class Solution:
+    def rearrangeArray(self, arr, n):
+        # code here
+        arr.sort()
+        
+        start, end = 0, n - 1
+        results = arr.copy()
+        arr.clear()
+        
+        while start < end:
+            arr.append(results[start])
+            arr.append(results[end])
+            start += 1
+            end -= 1
+        
+        if start == end:
+            arr.append(results[start])
