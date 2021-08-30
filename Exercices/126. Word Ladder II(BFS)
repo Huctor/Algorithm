@@ -1,0 +1,38 @@
+https://leetcode.com/problems/word-ladder-ii/
+
+Solution: 这个方法比较巧妙，先用通配符建立字典，然后BFS分层添加。通常情况这道题的解法为先BFS再DFS.
+
+class Solution:
+    def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
+        
+        wildcard_dict = collections.defaultdict(list)
+        for word in wordList:
+            for i in range(len(word)):
+                w = word[:i] + '*' + word[i + 1:]                
+                wildcard_dict[w].append(word)
+        
+        queue = collections.deque([(beginWord, [beginWord]), ("", [])])
+        visited = set()
+        result = []
+        tempVisited = set()
+        while queue:
+            word, path = queue.popleft()
+            if not word:
+                visited = visited.union(tempVisited)
+                tempVisited = set()
+                if len(queue):
+                    queue.append(("", []))                
+                continue
+            if word == endWord:                
+                result.append(list(path))                
+                continue               
+            for i in range(len(word)):
+                wild = word[:i] + '*' + word[i + 1:]
+                for w in wildcard_dict[wild]:
+                    if w not in visited:
+                        tempVisited.add(w)
+                        path.append(w)
+                        queue.append((w, list(path)))
+                        path.pop()
+                        
+        return result
