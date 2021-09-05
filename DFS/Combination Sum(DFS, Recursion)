@@ -32,4 +32,43 @@ class Solution:
             self.dfs(newCandidates, i, current_result, remain_target - newCandidates[i], results)
             
             current_result.pop()
+
+
+Solution:
+
+class Solution {
+    func combinationSum(_ candidates: [Int], _ target: Int) -> [[Int]] {
+        
+        if candidates.count == 0{
+            return []
+        }
+        
+        var results = [[Int]]()
+        var currentLevel = [Int]()
+        dfs(candidates, target, &currentLevel, &results)
+        return results
+        
+    }
+    
+    func dfs(_ candidates: [Int], _ target: Int, _ currentLevel: inout [Int], _ results: inout [[Int]]){
+        
+        if currentLevel.reduce(0, +) == target{
+            var level = currentLevel.sorted()
+            if !results.contains(level){
+                results.append(level)
+            }
+            return
+        }
+        
+        if currentLevel.reduce(0, +) > target{
+            return
+        }
+        
+        for value in candidates{
+            currentLevel.append(value)
+            dfs(candidates, target, &currentLevel, &results)
+            currentLevel.removeLast()
+        }                
+    }
+}
     
