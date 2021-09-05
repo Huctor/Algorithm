@@ -28,3 +28,45 @@ class Solution:
             if node.right:
                 queue.append(node.right)
         return results
+        
+Solution: Swift
+
+class Solution {
+    func levelOrder(_ root: TreeNode?) -> [[Int]] {
+        
+        if root == nil{
+            return []
+        }
+        
+        var queue = [root, nil]
+        var currentLevel = [Int]()
+        var results = [[Int]]()
+        
+        while !queue.isEmpty{
+            
+            let currentNode = queue.removeFirst()
+            
+            if currentNode == nil{
+                results.append(currentLevel)
+                currentLevel.removeAll()
+                if !queue.isEmpty{
+                    queue.append(nil)
+                }
+                continue
+            }
+            
+            currentLevel.append(currentNode!.val)
+            
+            if currentNode!.left != nil{
+                queue.append(currentNode!.left)
+            }
+            
+            if currentNode!.right != nil{
+                queue.append(currentNode!.right)
+            }            
+        }
+        
+        return results
+        
+    }
+}
