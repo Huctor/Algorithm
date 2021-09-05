@@ -21,3 +21,31 @@ class Solution:
                 return False
             
         return True
+
+
+Solution: Swift
+
+class Solution {
+    func isPalindrome(_ s: String) -> Bool {
+        
+        if s.count == 0{
+            return false
+        }
+    
+        var list = Array(s.filter{ $0.isNumber || $0.isLetter }.lowercased())
+        var start = 0
+        var end = list.count - 1
+        
+        while start < end{
+            if list[start] == list[end]{
+                start += 1
+                end -= 1
+                continue
+            }
+            
+            return false
+        }
+        
+        return true        
+    }
+}
