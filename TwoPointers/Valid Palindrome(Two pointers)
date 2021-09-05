@@ -23,7 +23,7 @@ class Solution:
         return True
 
 
-Solution: Swift
+Solution: Swift 转成array
 
 class Solution {
     func isPalindrome(_ s: String) -> Bool {
@@ -49,3 +49,42 @@ class Solution {
         return true        
     }
 }
+
+
+Solution: 不转成array
+
+class Solution {
+    func isPalindrome(_ s: String) -> Bool {
+        
+        if s.count == 0{
+            return false
+        }
+        
+        if s.count == 1{
+            return true
+        }
+    
+        var list = s.filter{ $0.isNumber || $0.isLetter }.lowercased()
+        
+        if list.count == 0{
+            return true
+        }
+        
+        var start = list.startIndex
+        var end = list.index(before: list.endIndex)
+
+        while start < end{
+            if list[start].lowercased() == list[end].lowercased(){
+                start = list.index(after: start)
+                end = list.index(before: end)
+                continue
+            }
+            
+            return false
+        }
+        
+        return true        
+    }
+}
+
+
