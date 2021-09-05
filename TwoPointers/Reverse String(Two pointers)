@@ -37,5 +37,23 @@ class Solution:
             left, right = left + 1, right - 1
         
         return s
+
+Solution 3: Swift
+
+class Solution {
+    func reverseString(_ s: inout [Character]) {
+        
+        var start = 0
+        var end = s.count - 1
+        
+        while start < end{
+            
+            (s[start], s[end]) = (s[end], s[start])
+            start += 1
+            end -= 1
+        }        
+    }
+}
+
             
             
