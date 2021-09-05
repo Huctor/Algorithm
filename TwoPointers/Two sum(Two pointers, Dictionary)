@@ -1,6 +1,6 @@
 https://leetcode.com/problems/two-sum/
 
-Solution:
+Solution: 用数组元素的值作为字典的key，用index作为字典的value
 
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
@@ -17,3 +17,27 @@ class Solution:
         
         return [-1, -1]
         
+Solution: Swift
+
+class Solution {
+    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+        
+        if nums.count < 2{
+            return []
+        }
+        
+        var dic = [Int:Int]()
+        
+        for (index, value) in nums.enumerated(){
+            
+            if let n = dic[target - value]{
+                return [n, index]
+            }
+            
+            dic[value] = index
+        }
+        
+        return[]
+        
+    }
+}
