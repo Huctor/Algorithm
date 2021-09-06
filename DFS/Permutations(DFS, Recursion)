@@ -29,3 +29,40 @@ class Solution:
             visited.remove(num)
             current_result.pop()
             
+Solution: Swift
+
+class Solution {
+    func permute(_ nums: [Int]) -> [[Int]] {
+        
+        if nums.count == 0{
+            return []
+        }
+        
+        var results = [[Int]]()
+        var currentLevel = [Int]()
+        var listSet = Set<Int>()
+        
+        dfs(nums, &listSet, &currentLevel, &results)      
+        
+        return results
+        
+    }
+    
+    func dfs(_ nums: [Int], _ listSet: inout Set<Int>, _ currentLevel: inout [Int], _ results:inout [[Int]]){
+
+        if currentLevel.count == nums.count{
+            results.append(currentLevel)
+            return
+        }
+        
+        for value in nums{
+            if !listSet.contains(value){
+                listSet.insert(value)
+                currentLevel.append(value)
+                dfs(nums, &listSet, &currentLevel, &results)
+                currentLevel.removeLast()
+                listSet.remove(value)
+            }
+        }
+    }
+}
