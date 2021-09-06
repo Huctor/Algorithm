@@ -24,4 +24,63 @@ class Solution:
                     mat[next_x][next_y] = count + 1
                     queue.append((next_x, next_y, count + 1))
                     visited.add((next_x, next_y))       
-        return mat        
+        return mat 
+        
+
+Solution: Swift
+
+class Solution {
+    func updateMatrix(_ mat: [[Int]]) -> [[Int]] {
+        
+        //var matCopy = mat
+        var matRow = mat.count
+        var matCol = mat[0].count
+        var matCopy = [[Int]](repeating:[Int](repeating: Int.max, count: matCol), count:matRow)
+        
+        for i in 0..<matRow{
+            for j in 0..<matCol{
+                matCopy[i][j] = mat[i][j]
+            }
+        }
+        
+        let directions = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+        
+        var colTotal = mat[0].count
+        var rowTotal = mat.count
+        
+        var queue = [[Int]]()
+        var collection = Set<[Int]>()
+        
+        for i in 0..<rowTotal{
+            for j in 0..<colTotal{
+                if mat[i][j] == 0{
+                    queue.append([i, j, 0])
+                    collection.insert([i, j])
+                }
+            }
+            
+        }
+        
+        while !queue.isEmpty{
+            
+            let current = queue.removeFirst()
+            var row = current[0]
+            var col = current[1]
+            var count = current[2]
+            
+            for direction in directions{
+                var nextRow = row + direction[0]
+                var nextCol = col + direction[1]
+                
+                if nextRow >= 0 && nextCol >= 0 && nextRow < rowTotal && nextCol < colTotal && !collection.contains([nextRow, nextCol]){
+                    matCopy[nextRow][nextCol] = count + 1
+                    queue.append([nextRow, nextCol, count + 1])
+                    collection.insert([nextRow, nextCol])
+                    
+                }
+            }           
+        } 
+        
+        return matCopy
+    }
+}
