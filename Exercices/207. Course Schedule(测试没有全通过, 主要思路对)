@@ -1,0 +1,94 @@
+https://leetcode.com/problems/course-schedule/
+
+Solution:
+
+class Solution {
+    func canFinish(_ numCourses: Int, _ prerequisites: [[Int]]) -> Bool {
+        
+        if prerequisites.count == 0{
+            return true
+        }
+
+        
+        var dic = [Int:[Int]]()
+        var dicValues = [Int:[Int]]()
+        var collectionNumbers = Set<Int>()
+        var queue = [Int]()
+        var results = [Int]()
+        
+        for value in prerequisites{
+            let key = value[0]
+            let dicValue = value[1]
+            
+            if !collectionNumbers.contains(key){
+                collectionNumbers.insert(key)
+            }
+            
+            if !collectionNumbers.contains(dicValue){
+                collectionNumbers.insert(dicValue)
+            }
+            
+            if !dic.keys.contains(key){
+                dic[key] = [dicValue]
+                
+            }else{
+                dic[key]!.append(dicValue)
+            }
+            
+            if !dicValues.keys.contains(dicValue){
+                dicValues[dicValue] = [key]
+                
+            }else{
+                dicValues[dicValue]!.append(key)
+            }
+        }
+        
+        if dic == dicValues{
+            return false
+        }
+        
+        for value in collectionNumbers{
+            if !dic.keys.contains(value){
+                queue.append(value)
+                while !queue.isEmpty{
+            
+                    let number = queue.removeFirst()
+            
+                    if dicValues.keys.contains(number){
+                        if !results.contains(number){
+                            results.append(number)
+                            if results.count >= numCourses{
+                                return true
+                            }
+                        }
+                    }else{
+                        break
+                    }
+                    
+                    for element in dicValues[number]!{
+                        if !results.contains(element){
+                            results.append(element)
+                            if results.count == collectionNumbers.count{
+                                print(results)
+                                return true
+                            }
+                            dic[element] = dic[element]!.filter{ $0 != number}
+                            if dic[element]!.count == 0{
+                                queue.append(element)
+                            }  
+                        }                      
+                    }
+            
+                }
+            }
+        }
+        
+        return false        
+        
+    }
+}
+
+有个测试没通过, 主要思路对
+
+4
+[[2,0],[1,0],[3,1],[3,2],[1,3]]
