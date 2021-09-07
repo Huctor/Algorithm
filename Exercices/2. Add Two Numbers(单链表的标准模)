@@ -1,0 +1,33 @@
+https://leetcode.com/problems/add-two-numbers/
+
+Solution: 单链表的标准模, 开始先创建一个dummy和tail
+
+class Solution {
+    func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+        
+        var dummy = ListNode(0)
+        var tail = dummy
+        var carry = 0
+        var l1Copy = l1
+        var l2Copy = l2
+        
+        while l1Copy != nil || l2Copy != nil || carry == 1{
+            
+            var sum = (l1Copy?.val ?? 0) + (l2Copy?.val ?? 0) + carry
+            
+            tail.next = ListNode(sum % 10)
+            tail = tail.next!
+            
+            l1Copy = l1Copy?.next
+            l2Copy = l2Copy?.next
+            
+            if sum >= 10{
+                carry = 1
+            }else{
+                carry = 0
+            }                      
+        }
+        
+        return dummy.next
+    }
+}
