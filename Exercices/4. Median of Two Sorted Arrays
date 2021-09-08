@@ -1,0 +1,30 @@
+https://leetcode.com/problems/median-of-two-sorted-arrays/
+
+Solution: 用的排列函数，估计是让用quickSort.
+
+class Solution {
+    func findMedianSortedArrays(_ nums1: [Int], _ nums2: [Int]) -> Double {
+        
+        var lengthNumsOne = nums1.count
+        var lengthNumnTwo = nums2.count
+        
+        var newArray = (nums1 + nums2).sorted()
+        
+        if newArray.count % 2 == 0{
+            
+            var mid = newArray.count / 2
+            
+            print(mid)
+            
+            return (Double)((newArray[mid] + newArray[mid - 1])) / 2
+            
+        }else if newArray.count % 2 == 1{
+            
+            var mid = newArray.count / 2
+            
+            return (Double)(newArray[mid])
+        }
+        
+        return 0.0
+    }
+}
