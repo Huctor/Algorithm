@@ -1,0 +1,66 @@
+https://leetcode.com/problems/longest-substring-without-repeating-characters/
+
+Solution: 滑动窗口经典题目，经典做法，用set储存重复数据，遇到相同的字符，用while移动做指针直到相同的字符，在移动过程中记着在set中除去滑过的字符。
+
+class Solution {
+    func lengthOfLongestSubstring(_ s: String) -> Int {
+        
+        var left = 0
+        var right = 0
+        var result = 0
+        var sArray = Array(s)
+        
+        
+        var collections = Set<Character>()
+        
+        while right < sArray.count{
+            
+             if collections.contains(sArray[right]){
+                
+                 while left <= right{
+                     if sArray[left] == sArray[right]{
+                         left += 1
+                         break
+                     }
+                     
+                     collections.remove(sArray[left])
+                     left += 1
+                 }                
+            }
+            
+            result = max(result, right - left + 1)
+            collections.insert(sArray[right])
+            right += 1
+        }
+        
+        return result
+    }
+}
+
+Solution:滑动窗口经典题目，用dictionary记录位置。遇到重复的字符，左指针取现在的位置和之前的位置的最大值。
+
+class Solution {
+    func lengthOfLongestSubstring(_ s: String) -> Int {
+        
+        var left = 0
+        var right = 0
+        var result = 0
+        var sArray = Array(s)
+        
+        var dic = [Character: Int]()
+        
+        while right < sArray.count{
+            
+             if dic.keys.contains(sArray[right]){
+                left = max(left, dic[sArray[right]]! + 1)
+            }
+            
+            result = max(result, right - left + 1)
+            dic[sArray[right]] = right
+            right += 1
+        }
+        
+        return result
+    }
+}
+      
