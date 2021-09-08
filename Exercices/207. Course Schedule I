@@ -1,6 +1,6 @@
 https://leetcode.com/problems/course-schedule/
 
-Solution:
+Solution: 注意判断是否为nil, BFS只在queue取值之后，把取的值添加到result里
 
 class Solution {
     func canFinish(_ numCourses: Int, _ prerequisites: [[Int]]) -> Bool {
@@ -8,7 +8,6 @@ class Solution {
         if prerequisites.count == 0{
             return true
         }
-
         
         var dic = [Int:[Int]]()
         var dicValues = [Int:[Int]]()
@@ -43,52 +42,51 @@ class Solution {
             }
         }
         
-        if dic == dicValues{
-            return false
-        }
-        
         for value in collectionNumbers{
             if !dic.keys.contains(value){
                 queue.append(value)
                 while !queue.isEmpty{
             
                     let number = queue.removeFirst()
-            
-                    if dicValues.keys.contains(number){
-                        if !results.contains(number){
-                            results.append(number)
-                            if results.count >= numCourses{
-                                return true
-                            }
+                    
+                    if !results.contains(number){
+                        results.append(number)
+                        if results.count == numCourses{
+                            return true
                         }
-                    }else{
-                        break
                     }
                     
-                    for element in dicValues[number]!{
-                        if !results.contains(element){
-                            results.append(element)
-                            if results.count == collectionNumbers.count{
-                                print(results)
-                                return true
+                    if dicValues[number] == nil{
+                        continue
+                    }
+                    
+                    for item in dicValues[number]!{
+                        
+                        if dic[item]!.count == 0{
+                            queue.append(item)
+                            continue
+                        }                        
+                        
+                        if dic[item]!.contains(number){
+                            
+                            dic[item] = dic[item]!.filter{ $0 != number}
+                            
+                            if dic[item]!.count == 0{
+                                queue.append(item)
                             }
-                            dic[element] = dic[element]!.filter{ $0 != number}
-                            if dic[element]!.count == 0{
-                                queue.append(element)
-                            }  
-                        }                      
+                                
+                        }                        
                     }
             
                 }
             }
         }
         
+        if results.count == collectionNumbers.count{
+            return true
+        }
+        
         return false        
         
     }
 }
-
-有个测试没通过, 主要思路对
-
-4
-[[2,0],[1,0],[3,1],[3,2],[1,3]]
