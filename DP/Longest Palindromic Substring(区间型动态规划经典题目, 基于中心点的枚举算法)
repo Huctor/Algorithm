@@ -64,7 +64,7 @@ class Solution {
     }
 }
 
-Solution: 区间型动态规划经典案例
+Solution: 区间型动态规划经典案例,但是这道题没有基于中心点的枚举算法快和用的空间少
 
 class Solution {
     func longestPalindrome(_ s: String) -> String {
