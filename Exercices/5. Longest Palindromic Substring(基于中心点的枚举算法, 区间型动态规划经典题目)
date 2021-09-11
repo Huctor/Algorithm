@@ -1,0 +1,121 @@
+https://leetcode.com/problems/longest-palindromic-substring/
+
+Solution: 基于中心点的枚举算法
+
+class Solution {
+    func longestPalindrome(_ s: String) -> String {
+        
+        var x = 0
+        var y = 0
+        var xResult = 0
+        var yResult = 0
+        var sArray = Array(s)
+        var stringResult = ""
+        
+        for index in 0..<s.count{
+    
+            (x, y) = isPalindrome(sArray, index, index)
+            
+            if (y - x) > (yResult - xResult){
+                xResult = x
+                yResult = y
+            }
+            
+            (x, y) = isPalindrome(sArray, index, index + 1)
+            
+            if (y - x) > (yResult - xResult){
+                xResult = x
+                yResult = y
+            }
+            
+        }
+        
+        print(xResult)
+        print(yResult)
+        
+        for i in xResult..<yResult{
+            
+            stringResult += String(sArray[i])
+        }
+        
+        return stringResult
+        
+    }
+    
+    func isPalindrome(_ s: [Character], _ left: Int, _ right: Int) -> (Int, Int){
+        
+        var l = left
+        var r = right
+        
+        while l >= 0 && r < s.count{
+            
+            if s[l] == s[r]{
+                
+                l -= 1
+                r += 1
+                continue
+            }
+            
+            break
+        }
+        
+        return (l + 1, r)
+        
+    }
+}
+
+Solution: 区间型动态规划经典案例
+
+class Solution {
+    func longestPalindrome(_ s: String) -> String {
+        
+        var length = s.count
+        var sArray = Array(s)
+        
+        if sArray.count == 0{
+            return ""
+        }        
+        
+        var isPalindrome = [[Int]](repeating: [Int](repeating: 0, count: length), count:length)
+        
+        var longest = 1
+        var start = 0
+        var result = ""
+        
+        //单个字符
+        for i in 0..<length{
+            isPalindrome[i][i] = 1
+        }
+        
+        //两个字符
+        for i in 0..<(length - 1){
+            if sArray[i] == sArray[i + 1]{
+                isPalindrome[i][i + 1] = 1
+                start = i
+                longest = 2
+            }            
+        }        
+        
+        //三个以上字符
+        for i in (0..<(length - 1)).reversed(){
+            for j in (i + 2)..<length{
+                
+                if isPalindrome[i + 1][ j - 1] == 1 && (sArray[i] == sArray[j]){
+                    isPalindrome[i][j] = 1
+                    
+                    if (j - i + 1) > longest{
+                        start = i
+                        longest = j - i + 1
+                    }
+                }  
+            }   
+        }
+        
+        for i in start..<(start+longest){
+            result += String(sArray[i])
+        }
+        
+        return result
+        
+    }
+}
