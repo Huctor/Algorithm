@@ -1,6 +1,6 @@
 https://leetcode.com/problems/longest-palindromic-substring/
 
-Solution:
+Solution: 基于中心点的枚举算法
 
 class Solution {
     func longestPalindrome(_ s: String) -> String {
