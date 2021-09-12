@@ -1,0 +1,43 @@
+https://leetcode.com/problems/reverse-integer/
+
+Solution:
+
+class Solution {
+    func reverse(_ x: Int) -> Int {
+                
+        if x == 0{
+            return x
+        }
+        
+        var sign = -1
+        var value = x
+        
+        if value > 0{
+            sign = 1
+        }else{
+            value *= -1
+        }
+        
+        var result = 0
+        
+        while value >= 1{
+            
+            var index = 1
+            for _ in 1..<String(value).count{
+                   index *= 10             
+            }
+            
+            result += (value % 10) * index            
+            value /= 10
+            
+        }
+        
+        result *= sign
+        
+        if (result < Int32.min) || (result > Int32.max){
+            return 0
+        }
+        
+        return result
+    }
+}
