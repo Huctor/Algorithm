@@ -1,0 +1,73 @@
+https://leetcode.com/problems/zigzag-conversion/
+
+Solution:
+
+class Solution {
+    func convert(_ s: String, _ numRows: Int) -> String {
+        
+        if s.count == 0{
+            return ""
+        }
+        
+        if numRows == 1{
+            return s
+        }
+        
+        var sArray = Array(s)
+        
+        var newArray = [[Character]](repeating:[Character](repeating: "!", count:sArray.count), count:numRows)
+        
+        let down = [1, 0]
+        let upRight = [-1, 1]
+        let up = [-1, 0]
+        
+        var x = 0
+        var y = 0
+        
+        for value in sArray{
+            
+            if newArray[x][y] == "!"{
+                newArray[x][y] = value
+            }
+            
+            if x == 0{
+                x += down[0]
+                y += down[1]
+                continue                
+            }
+            
+            if x == (numRows - 1){
+                x += upRight[0]
+                y += upRight[1]
+                continue
+            }
+            
+            if x > 0 && x < (numRows - 1){
+                
+                if newArray[x + up[0]][y + up[1]] == "!"{
+                    x += upRight[0]
+                    y += upRight[1]
+                    continue
+                }else{
+                    x += down[0]
+                    y += down[1]
+                    continue
+                }  
+                
+            }                       
+        }
+    
+        var results = ""
+        for i in 0..<numRows{
+            for j in 0..<sArray.count{
+                if newArray[i][j] != "!"{
+                    results += String(newArray[i][j])
+                }
+            }            
+        }        
+        
+        return results
+        
+    }
+}
+
