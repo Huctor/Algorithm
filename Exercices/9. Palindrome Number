@@ -1,0 +1,31 @@
+https://leetcode.com/problems/palindrome-number/
+
+Solution:
+
+class Solution {
+    func isPalindrome(_ x: Int) -> Bool {
+        
+        if x < 0{
+            return false
+        }
+        
+        var numString = String(x)
+        var numArray = Array(numString)
+        
+        var start = 0
+        var end = numArray.count - 1
+        
+        while start <= end{
+            
+            if numArray[start] == numArray[end]{
+                start += 1
+                end -= 1
+                continue
+            }else{
+                return false
+            }
+        }        
+        
+        return true        
+    }
+}
