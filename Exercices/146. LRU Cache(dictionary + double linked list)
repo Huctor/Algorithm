@@ -1,6 +1,6 @@
 https://leetcode.com/problems/lru-cache/
 
-Solution:
+Solution: 字典 + 双向链表
 
 class DLLNode{
     
