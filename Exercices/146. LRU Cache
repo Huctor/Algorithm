@@ -1,0 +1,97 @@
+https://leetcode.com/problems/lru-cache/
+
+Solution:
+
+class DLLNode{
+    
+    var key: Int
+    var value: Int
+    var prev: DLLNode? = nil
+    var next: DLLNode? = nil
+    
+    init(_ key: Int,_ value: Int){
+        self.key = key
+        self.value = value
+    }
+}
+
+class LRUCache {
+    
+    var capacity: Int
+    var dicNodes = [Int:DLLNode]()
+    var size = 0
+    var head = DLLNode(-1, -1)
+    var tail = DLLNode(-1, -1)
+
+    func addNode(_ node: DLLNode){
+        node.prev = self.head
+        node.next = self.head.next
+        self.head.next?.prev = node
+        self.head.next = node
+    }
+
+    func removeNode(_ node: DLLNode){
+        var prev = node.prev
+        var next = node.next
+        prev?.next = next
+        next?.prev = prev
+        
+    }
+
+    func popTail() -> DLLNode{
+        
+        var nodeToPop = self.tail.prev
+        self.removeNode(nodeToPop!)        
+        return nodeToPop!
+    }
+
+    func moveToHead(_ node: DLLNode){
+        
+        if node != nil{
+            self.removeNode(node)
+            self.addNode(node)   
+        }
+    }
+
+    init(_ capacity: Int) {
+        self.capacity = capacity
+        self.head.next = self.tail
+        self.tail.prev = self.head
+    }
+    
+    func get(_ key: Int) -> Int {
+        guard let node = self.dicNodes[key] else{
+            return -1
+        }
+        
+        self.moveToHead(node)        
+        return node.value
+        
+    }
+    
+    func put(_ key: Int, _ value: Int) {
+        if let node = self.dicNodes[key]{
+            node.value = value
+            self.moveToHead(node)
+            
+        }else{
+            var newNode = DLLNode(key, value)
+            self.dicNodes[key] = newNode
+            self.addNode(newNode)
+            self.size += 1
+            if self.size > self.capacity{
+                var nodeTail = self.popTail()
+                self.dicNodes[nodeTail.key] = nil
+                self.size -= 1
+            }
+        }
+        
+    }
+}
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * let obj = LRUCache(capacity)
+ * let ret_1: Int = obj.get(key)
+ * obj.put(key, value)
+ */
