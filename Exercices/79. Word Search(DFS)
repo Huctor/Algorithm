@@ -1,0 +1,49 @@
+https://leetcode.com/problems/word-search/
+
+Solution: DFS
+
+class Solution {
+    func exist(_ board: [[Character]], _ word: String) -> Bool {
+        
+        var wordArray = Array(word)
+        var row = board.count
+        var col = board[0].count
+        var collection = Set<[Int]>()
+        
+        for i in 0 ..< row {
+            for j in 0 ..< col{
+                
+                if board[i][j] == wordArray[0]{
+                    if self.dfs(board, wordArray, i, j, &collection, 0) == true{
+                       return true
+                    }
+                }
+            }
+        }
+        
+        return false        
+    }
+    
+    func dfs(_ board:[[Character]], _ wordArray:[Character], _ xPosition: Int, _ yPosition: Int, _ collection: inout Set<[Int]>, _ index: Int) -> Bool {
+        
+        if wordArray.count == index{
+            return true
+        }
+        
+        if xPosition >= 0 && yPosition >= 0 && xPosition < board.count && yPosition < board[0].count{
+            
+            if board[xPosition][yPosition] == wordArray[index]{
+                if !collection.contains([xPosition, yPosition]){
+                    collection.insert([xPosition, yPosition])
+                    if dfs(board, wordArray, xPosition, yPosition + 1, &collection, index + 1) || dfs(board, wordArray, xPosition, yPosition - 1, &collection, index + 1) || dfs(board, wordArray, xPosition + 1, yPosition, &collection, index + 1) || dfs(board, wordArray, xPosition - 1, yPosition, &collection, index + 1){
+                        return true
+                    }
+                    
+                    collection.remove([xPosition, yPosition])
+                }                
+            }            
+        }
+        
+        return false
+    }        
+}
