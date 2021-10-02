@@ -1,0 +1,26 @@
+https://leetcode.com/problems/minimize-maximum-pair-sum-in-array/
+
+Solution:
+
+class Solution {
+    func minPairSum(_ nums: [Int]) -> Int {
+        
+        var numsSorted = nums.sorted()
+        
+        var start = 0
+        var end = nums.count - 1
+        
+        var sum = 0
+        
+        while start < end{
+            
+            sum = max(sum, numsSorted[start] + numsSorted[end])
+            
+            start += 1
+            end -= 1
+            
+        }
+        
+        return sum        
+    }
+}
