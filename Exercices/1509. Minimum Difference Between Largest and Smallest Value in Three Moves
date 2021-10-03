@@ -1,0 +1,21 @@
+https://leetcode.com/problems/minimum-difference-between-largest-and-smallest-value-in-three-moves/submissions/
+
+Solution: 先排序，然后比较前四个数和后四个的的差值，最小的差值即为最小的峰值
+
+class Solution {
+    func minDifference(_ nums: [Int]) -> Int {
+        
+        if nums.count <= 4{
+            return 0
+        }
+        
+        var numsArray = nums.sorted()
+        
+        var caseOne = numsArray[numsArray.count - 4] - numsArray[0]
+        var caseTwo = numsArray[numsArray.count - 3] - numsArray[1]
+        var caseThree = numsArray[numsArray.count - 2] - numsArray[2]
+        var caseFour = numsArray[numsArray.count - 1] - numsArray[3]
+        
+        return min(caseOne, caseTwo, caseThree, caseFour)        
+    }
+}
