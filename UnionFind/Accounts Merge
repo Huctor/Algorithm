@@ -1,0 +1,68 @@
+https://leetcode.com/problems/accounts-merge/
+
+Solution: 1 每个元素是自己的father 2 每组的第一个元素是其他元素的father，这个时候union可以合并存在相同元素的两组 3 取出name合并同一个father下的元素
+
+class Solution {
+    func accountsMerge(_ accounts: [[String]]) -> [[String]] {
+        
+        var father = [String : String]()
+        var name = [String : String]()
+        var dic = [String :[String]]()
+        var result = [[String]]()
+        
+        // set every eamil as it's father
+        for account in accounts{
+            for i in 1 ..< account.count{
+                father[account[i]] = account[i]
+                name[account[i]] = account[0]
+            }
+        }
+        
+        // union each emails array under the same account
+        for account in accounts{
+            for i in 2 ..< account.count{
+                var accountI = account[i]
+                var accountOne = account[1]
+                union(&accountI, &accountOne, &father)
+            }
+        }
+        
+        // create new dictionary with regroup email
+        for account in accounts{
+            for i in 1 ..< account.count{
+                
+                var value = account[i]
+                var tempValue = self.find(&value, &father)
+                
+                if !dic.keys.contains(tempValue){
+                   dic[tempValue] = [account[i]]
+                    continue
+                }
+                
+                dic[tempValue]!.append(account[i])                                
+            }            
+        }
+        
+        for key in dic.keys{
+            result.append([name[key]!] + Set(dic[key]!).sorted(by: <))            
+        }
+        
+        return result
+        
+    }
+    
+    func union(_ first: inout String, _ second: inout String, _ father : inout [String : String]){
+        
+        father[self.find(&first, &father)] = self.find(&second, &father)
+        
+    }
+    
+    func find(_ value: inout String, _ father: inout [String : String]) -> String{
+        
+        while father[value] != value{
+            value = father[value]!
+        }
+        
+        return father[value]!
+    }
+}
