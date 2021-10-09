@@ -1,0 +1,73 @@
+https://leetcode.com/problems/implement-trie-prefix-tree/
+
+Solution:
+
+class Trie {
+
+    var root : TrieNode?
+    init() {
+        root = TrieNode()
+    }
+    
+    func insert(_ word: String) {
+        
+        var node = root
+        
+        for value in word{
+            if !node!.children.keys.contains(value){
+                node!.children[value] = TrieNode()
+            }
+            
+            node = node!.children[value]
+        }
+        
+        node!.isWord = true
+    }
+    
+    func find(_ word: String) -> TrieNode?{        
+        
+        var node = root        
+        
+        for value in word{
+            if !node!.children.keys.contains(value){
+                return nil
+            }
+            
+            node = node!.children[value]
+        }
+        
+        return node!        
+    }
+    
+    func search(_ word: String) -> Bool {
+        var node = find(word)
+    
+        if node != nil && node!.isWord{
+            return true
+        }
+        
+        return false        
+    }
+    
+    func startsWith(_ prefix: String) -> Bool {
+        var node = find(prefix)
+        if node != nil{
+            return true
+        }
+        
+        return false 
+    }
+}
+
+class TrieNode{   
+    var children = [Character : TrieNode]()
+    var isWord = false
+}
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * let obj = Trie()
+ * obj.insert(word)
+ * let ret_2: Bool = obj.search(word)
+ * let ret_3: Bool = obj.startsWith(prefix)
+ */
