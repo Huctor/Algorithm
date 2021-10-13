@@ -1,5 +1,7 @@
 https://leetcode.com/problems/valid-palindrome-ii/
 
+相向双指针，当遇到不相等的时候，去掉左边或者去掉右边继续判断是否为回文字符串。
+
 Solution:
 
 class Solution:
