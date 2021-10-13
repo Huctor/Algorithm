@@ -1,5 +1,9 @@
 https://leetcode.com/problems/find-k-closest-elements/
 
+因为给出的input是有序的，所以用binary search可以找到给出x的位置，或者离x最近的数的位置(通过target离左右指针的距离决定返回left还是right，返回距离近的)。
+然后再循环k次找出k个数字。注意边界条件的的处理left < 0时，返回false则有指针向右移，当right >=数组长度时，则返回true，左指针向左移。
+
+
 Solution:
 
 class Solution:
