@@ -1,5 +1,7 @@
 https://leetcode.com/problems/binary-search/
 
+while中每次都除以2，然后和target对比
+
 Solution 1:
 
 class Solution:
