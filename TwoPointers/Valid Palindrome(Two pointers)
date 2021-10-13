@@ -1,5 +1,7 @@
 https://leetcode.com/problems/valid-palindrome/
 
+左右两个指针，相向双指针，判断左右两边是否相等。
+
 Solution:
 
 class Solution:
