@@ -1,5 +1,7 @@
 https://leetcode.com/problems/reverse-string/
 
+相向双指针，左右调换就好了
+
 Solution 1:
 
 class Solution:
