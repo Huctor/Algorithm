@@ -1,0 +1,47 @@
+https://leetcode.com/problems/3sum/
+
+Solution: Swift 先确定一个数字，然后用双指针相向移动相加和0减去第一个数字的结果比较
+
+class Solution {
+    func threeSum(_ nums: [Int]) -> [[Int]] {
+        
+        if nums.count < 3{
+            return []
+        }
+        
+        var newNums = nums.sorted()
+        
+        var results = Set<[Int]>()
+        
+        var j = 0
+        var k = 0
+        
+        for i in 0 ..< (newNums.count - 2){
+            
+            j = i + 1
+            k = newNums.count - 1
+            
+            while j < k{
+                
+                if newNums[j] + newNums[k] < 0 - newNums[i]{
+                    
+                    j += 1
+                    
+                }else if newNums[j] + newNums[k] > 0 - newNums[i]{
+                    
+                    k -= 1
+                    
+                }else{
+                    
+                    results.insert([newNums[i], newNums[j], newNums[k]])
+                    j += 1
+                    k -= 1
+                }    
+            }
+                        
+        }
+                           
+        return Array(results)
+        
+    }
+}
