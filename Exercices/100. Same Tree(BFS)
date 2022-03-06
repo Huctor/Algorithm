@@ -1,0 +1,58 @@
+https://leetcode.com/problems/same-tree/
+
+Solution: Swift
+
+class Solution {
+    func isSameTree(_ p: TreeNode?, _ q: TreeNode?) -> Bool {
+        
+        if p == nil && q == nil{
+            return true
+        }else{
+            if !(p != nil && q != nil){
+                return false
+            }
+        }
+        
+        var pQueue = [p]
+        var qQueue = [q]
+        
+        while !pQueue.isEmpty && !qQueue.isEmpty {
+            
+            let pNode = pQueue.removeFirst()
+            let qNode = qQueue.removeFirst()
+            
+            if let pValue = pNode, let qValue = qNode{
+                if pValue.val != qValue.val{
+                    return false
+                }
+            }
+            
+            if pNode!.left != nil && qNode!.left != nil{
+                pQueue.append(pNode!.left)
+                qQueue.append(qNode!.left)
+            }else{
+                if !(pNode!.left == nil && qNode!.left == nil){
+                    return false
+                }
+            }
+            
+            
+            if pNode!.right != nil && qNode!.right != nil{
+                pQueue.append(pNode!.right)
+                qQueue.append(qNode!.right)
+            }else{
+                if !(pNode!.right == nil && qNode!.right == nil){
+                    return false
+                }
+            }            
+            
+        }
+        
+        if !(pQueue.isEmpty && qQueue.isEmpty){
+            return false
+        }
+        
+        return true
+        
+    }
+}
