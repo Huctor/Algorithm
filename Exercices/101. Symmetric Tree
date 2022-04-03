@@ -1,0 +1,69 @@
+https://leetcode.com/problems/symmetric-tree/
+
+Solution: Swift
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public var val: Int
+ *     public var left: TreeNode?
+ *     public var right: TreeNode?
+ *     public init() { self.val = 0; self.left = nil; self.right = nil; }
+ *     public init(_ val: Int) { self.val = val; self.left = nil; self.right = nil; }
+ *     public init(_ val: Int, _ left: TreeNode?, _ right: TreeNode?) {
+ *         self.val = val
+ *         self.left = left
+ *         self.right = right
+ *     }
+ * }
+ */
+class Solution {
+    func isSymmetric(_ root: TreeNode?) -> Bool {
+        
+        var queue = [root, root]
+        
+        while !queue.isEmpty{
+            
+            var nodeLeft = queue.removeFirst()
+            var nodeRight = queue.removeFirst()
+            
+            if nodeLeft == nil && nodeRight == nil{
+                continue
+            }
+            
+            if nodeLeft == nil || nodeRight == nil{
+                return false
+            }
+            
+            if nodeLeft!.val != nodeRight!.val{
+                return false
+            }
+            
+            if nodeLeft!.left != nil{
+                queue.append(nodeLeft!.left)
+            }else{
+                queue.append(nil)
+            }
+            
+            if nodeRight!.right != nil{
+                queue.append(nodeRight!.right)
+            }else{
+                queue.append(nil)
+            }
+                   
+            if nodeLeft!.right != nil{
+                queue.append(nodeLeft!.right)
+            }else{
+                queue.append(nil)
+            }
+            
+            if nodeRight!.left != nil{
+                queue.append(nodeRight!.left)
+            }else{
+                queue.append(nil)
+            }    
+        }
+        
+        return true
+    }
+}
