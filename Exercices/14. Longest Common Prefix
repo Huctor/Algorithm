@@ -1,0 +1,50 @@
+https://leetcode.com/problems/longest-common-prefix/
+
+Solution: Swift
+
+class Solution {
+    func longestCommonPrefix(_ strs: [String]) -> String {
+        
+        if strs == nil{
+            return ""
+        }
+        
+        if strs.count == 1{
+            return strs[0]
+        }
+        
+        if strs[0] == ""{
+            return ""
+        }
+        
+        var i = 0
+        
+        var result = ""
+        
+        while i <= strs[0].count - 1{
+            
+            let parttern = Array(strs[0])[i]
+            
+            for str in strs{
+                
+                if i >= str.count{
+                    return result
+                }
+                
+                if parttern == Array(str)[i]{
+                    continue
+                }else{
+                    return result
+                }   
+            }
+            
+            result = result + String(parttern)
+            
+            i += 1
+             
+        }
+        
+        return result
+        
+    }
+}
