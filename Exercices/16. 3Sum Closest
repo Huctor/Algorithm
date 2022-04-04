@@ -1,0 +1,46 @@
+https://leetcode.com/problems/3sum-closest/
+
+Solution: Swift 三个数字可以是不连续的. 先排序，三个指针，根据sum和target的大小比较，先移动后两个指针，再移动第一个指针.
+
+class Solution {
+    func threeSumClosest(_ nums: [Int], _ target: Int) -> Int {
+        
+        let newNums = nums.sorted()
+        var start = 0
+        var result = 0
+        var sum = 0
+        var distance = Int.max
+        
+        while start < newNums.count - 2{
+            
+            var mid = start + 1
+            var end = newNums.count - 1
+            
+            while mid < end{
+                
+                sum = newNums[start] + newNums[mid] + newNums[end]
+                
+                if sum == target{
+                    return sum
+                }
+                
+                if sum > target{
+                    end -= 1
+                }else{
+                    mid += 1
+                }
+                
+                var diff = abs(sum - target)
+                
+                if diff < distance{
+                    distance = diff
+                    result = sum
+                }
+            }
+            
+            start += 1
+        }
+        
+        return result 
+    }
+}
