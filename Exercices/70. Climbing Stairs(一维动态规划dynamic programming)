@@ -1,0 +1,27 @@
+https://leetcode.com/problems/climbing-stairs/
+
+Solution: Swift 一维动态规划
+
+class Solution {
+    func climbStairs(_ n: Int) -> Int {
+        
+        if n == 1{
+            return 1
+        }
+        
+        if n == 2{
+            return 2
+        }
+        
+        var dy = [Int](repeating: 0, count: n + 1)
+        dy[1] = 1
+        dy[2] = 2
+        
+        for i in 3...n{
+            dy[i] = dy[i - 1] + dy[i - 2]
+        }
+        
+        return dy[n]
+        
+    }
+}
