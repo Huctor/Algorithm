@@ -24,13 +24,22 @@ class Solution {
         var newHead: ListNode? = nil
         
         while inputHead != nil{
-            var next = inputHead!.next
-            inputHead!.next = newHead
-            newHead = inputHead
-            inputHead = next
+            var next = inputHead!.next //Line 1
+            inputHead!.next = newHead // Line 2
+            newHead = inputHead //Line 3
+            inputHead = next // Line 4
         }
         
         return newHead
         
     }
 }
+
+思路:
+1 首先把旧链表head第二个值取出来备用, 因为之后要循环, 由此而得来Line 1
+2 把备用值赋给head, 用来继续循环, 由此得来Line 4
+3 把旧链表head添加到新链表头部, 具体做法为把head的next设置为newHead，由此而来Line 2
+4 然后更新newHead的值为head, 以保持newHead始终为新链表的头部, 由此而来Line 3
+         
+        @
+        
