@@ -1,0 +1,24 @@
+https://leetcode.com/problems/maximum-subarray/
+
+Solution: Swift 指针从左至右一次移动, 当前指针前一位的和大于零则与当前指针数值相加, 否则从计算和. 记住就好.
+
+class Solution {
+    func maxSubArray(_ nums: [Int]) -> Int {
+        
+        var newNums = nums
+        
+        if newNums.count == 1{
+            return newNums[0]
+        }
+        
+        for i in 1...(newNums.count - 1){
+            
+            if newNums[i - 1] > 0{
+                newNums[i] = newNums[i] + newNums[i - 1]
+            }
+        }
+        
+        return newNums.max()!
+        
+    }
+}
