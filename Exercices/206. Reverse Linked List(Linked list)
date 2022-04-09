@@ -41,5 +41,5 @@ class Solution {
 3 把旧链表head添加到新链表头部, 具体做法为把head的next设置为newHead，由此而来Line 2
 4 然后更新newHead的值为head, 以保持newHead始终为新链表的头部, 由此而来Line 3
          
-        @
+讲的比较清楚 https://www.youtube.com/watch?v=iT1YrvSNtlw
         
