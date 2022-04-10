@@ -1,0 +1,47 @@
+https://leetcode.com/problems/kth-largest-element-in-an-array/
+
+Solution: Swift 用CFBinaryHeap这个API, 在CoreFoundation里
+
+import CoreFoundation
+
+class Solution {
+    func findKthLargest(_ nums: [Int], _ k: Int) -> Int {
+        
+        var heap = CFBinaryHeap.minHeap()
+        
+        for num in nums{
+            
+            var pointer = UnsafeMutablePointer<Int>.allocate(capacity : 1)
+            pointer.initialize(to: num)
+            
+            CFBinaryHeapAddValue(heap, pointer)
+            
+            if CFBinaryHeapGetCount(heap) > k{
+                CFBinaryHeapRemoveMinimumValue(heap)
+            }
+        }
+        
+        return CFBinaryHeapGetMinimum(heap).load(as: Int.self)
+    }
+    
+}
+
+extension CFBinaryHeap{
+    
+    static func minHeap() -> CFBinaryHeap{
+        
+        var callback = CFBinaryHeapCallBacks()
+        
+        callback.compare = { lptr, rptr, _ in
+            let (left, right) = (lptr!.load(as: Int.self), rptr!.load(as: Int.self))
+            if ( left == right ) { return CFComparisonResult.compareEqualTo }
+            if ( left > right ) { return CFComparisonResult.compareGreaterThan }
+            return CFComparisonResult.compareLessThan            
+        }
+        
+        
+        return CFBinaryHeapCreate(nil, 0, &callback, nil)
+        
+    }
+    
+}
