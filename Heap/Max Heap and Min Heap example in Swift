@@ -5,7 +5,9 @@ extension CFBinaryHeap {
         var callbacks = CFBinaryHeapCallBacks()
         callbacks.compare = { lPtr, rPtr, _ in
             let (lhs, rhs) = (lPtr!.load(as: Int.self), rPtr!.load(as: Int.self))
-            return lhs == rhs ? 0 : lhs > rhs ? 1 : -1
+            if ( left == right ) { return CFComparisonResult.compareEqualTo }
+            if ( left > right ) { return CFComparisonResult.compareGreaterThan }
+            return CFComparisonResult.compareLessThan     
         }
         return CFBinaryHeapCreate(nil, 0, &callbacks, nil)
     }
@@ -14,7 +16,9 @@ extension CFBinaryHeap {
         var callbacks = CFBinaryHeapCallBacks()
         callbacks.compare = { lPtr, rPtr, _ in
             let (lhs, rhs) = (lPtr!.load(as: Int.self), rPtr!.load(as: Int.self))
-            return lhs == rhs ? 0 : lhs > rhs ? -1 : 1
+            if ( left == right ) { return CFComparisonResult.compareEqualTo }
+            if ( left > right ) { return CFComparisonResult.compareLessThan }
+            return CFComparisonResult.compareGreaterThan     
         }
         return CFBinaryHeapCreate(nil, 0, &callbacks, nil)
     }
