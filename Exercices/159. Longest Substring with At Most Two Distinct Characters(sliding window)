@@ -1,0 +1,52 @@
+https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/
+
+Solution:
+
+class Solution {
+    func lengthOfLongestSubstringTwoDistinct(_ s: String) -> Int {
+        
+        var left = 0
+        var right = 0
+        var result = 0
+        var dic = [Character : Int]()
+        var collection = Set<Character>()
+        
+        var sArray = Array(s)
+        
+        while right < sArray.count{
+            
+            collection.insert(sArray[right])
+            
+            if collection.count > 2{
+                
+                while left <= right{
+                    
+                    if dic[sArray[left]]! > 0{
+                        dic[sArray[left]] = dic[sArray[left]]! - 1
+                        
+                        if dic[sArray[left]]! == 0{
+                            dic[sArray[left]] = nil
+                            collection.remove(sArray[left])
+                            left += 1
+                            break
+                        }
+                        
+                        left += 1
+                    }
+                }
+            }
+            
+            result = max(result, right - left + 1)
+            
+            if dic[sArray[right]] == nil{
+                dic[sArray[right]] = 1
+            }else{
+                dic[sArray[right]] = dic[sArray[right]]! + 1
+            }
+            right += 1
+                        
+        }
+       
+        return result
+    }
+}
