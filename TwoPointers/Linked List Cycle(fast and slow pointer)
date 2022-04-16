@@ -1,0 +1,36 @@
+https://leetcode.com/problems/linked-list-cycle/
+
+Solution: Swift 满指针走一步, 快指针走两步, 有重合则证明有环, 没有重合或者快指针的为nil或者快指针的next为nil则证明没有坏.
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     public var val: Int
+ *     public var next: ListNode?
+ *     public init(_ val: Int) {
+ *         self.val = val
+ *         self.next = nil
+ *     }
+ * }
+ */
+
+class Solution {
+    func hasCycle(_ head: ListNode?) -> Bool {
+        
+        var fast = head
+        var slow = head
+        
+        while fast != nil && fast!.next != nil{
+            
+            slow = slow?.next
+            fast = fast?.next?.next
+            
+            if slow === fast{
+                return true
+            }            
+        }
+        
+        return false
+        
+    }
+}
