@@ -1,0 +1,49 @@
+https://leetcode.com/problems/insert-interval/
+
+Solution: 合并区间, 注意总结规律, 区间数组已每个区间第一个数字升序排序, 因此相邻区间如果第一个区间的最后一个数字大于等于第二个区间的第一个数字, 那么这两个区间就可以合并.
+此题目先把新区间按第一个数字升序的规则插入区间数组, 然后使用leetcode 56题的方法合并区间.
+
+class Solution {
+    func insert(_ intervals: [[Int]], _ newInterval: [Int]) -> [[Int]] {
+        
+        var intervalsCopy = intervals
+        var results = [[Int]]()
+        var index = 0
+        
+        if intervalsCopy.count == 0{
+            results.append(newInterval)
+            return results
+        }
+        
+        while index < intervalsCopy.count{
+            
+            if intervalsCopy[index][0] > newInterval[0]{
+                break
+            }
+            
+            index += 1
+        }
+        
+        intervalsCopy.insert(newInterval, at: index)
+        
+        print(intervalsCopy)
+        
+        //leetcode 56
+        for interval in intervalsCopy{
+            
+            if results.count == 0{
+                results.append(interval)
+                continue
+            }
+            
+            if results[results.count - 1][1] >= interval[0]{
+                results[results.count - 1][1] = max(results[results.count - 1][1], interval[1])
+            }else{
+                results.append(interval)
+            }            
+        }
+        
+        return results
+                
+    }
+}
