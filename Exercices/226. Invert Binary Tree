@@ -1,0 +1,30 @@
+https://leetcode.com/problems/invert-binary-tree/
+
+Solution: 把每个node放入queue里, 依次取出交换左右子节点, 再将子节点放入queue继续
+
+class Solution {
+    func invertTree(_ root: TreeNode?) -> TreeNode? {
+        
+        var queue = [root]
+        
+        while queue.count > 0{
+            
+            var node = queue.removeFirst()
+            
+            if node == nil{
+                continue
+            }
+            
+            var leftNode = node!.left
+            var rightNode = node!.right
+            
+            (node!.left, node!.right) = (node!.right, node!.left)
+            
+            queue.append(leftNode)
+            queue.append(rightNode)          
+        }
+        
+        return root
+        
+    }
+}
