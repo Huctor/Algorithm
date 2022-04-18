@@ -1,0 +1,40 @@
+https://leetcode.com/problems/flood-fill/
+
+Soluton: BFS, 记着用Set, 否则一个点重复计算, 退不出while
+
+class Solution {
+    func floodFill(_ image: [[Int]], _ sr: Int, _ sc: Int, _ newColor: Int) -> [[Int]] {
+        
+        var imageCopy = image
+        var directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+        
+        var queue = [(sr, sc)]
+        var row = imageCopy.count
+        var col = imageCopy[0].count
+        var flag = imageCopy[sr][sc]
+        imageCopy[sr][sc] = newColor
+        var collection = Set<[Int]>()
+        
+        while queue.count > 0{
+            
+            var (x, y) = queue.removeFirst()            
+            
+            for direct in directions{
+                
+                var xNext = x + direct.0
+                var yNext = y + direct.1
+                
+                if (xNext >= 0 && xNext < row) && (yNext >= 0 && yNext < col) && (imageCopy[xNext][yNext] == flag) && !collection.contains([xNext, yNext]){
+                
+                    imageCopy[xNext][yNext] = newColor
+                    collection.insert([xNext, yNext])
+                    queue.append((xNext, yNext))
+                }
+                
+            }                        
+        }
+        
+        return imageCopy
+                
+    }
+}
