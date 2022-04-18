@@ -1,0 +1,29 @@
+https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
+
+Solution: 注意binary search tree左子树永远小于父节点, 右子树永远大于父节点, 因此可以判断, p和q的值分表在某一节点两侧时, 该节点即为答案
+
+class Solution {
+    func lowestCommonAncestor(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
+        
+        var newRoot = root
+        
+        var pValue = p!.val
+        var qValue = q!.val
+        
+        while newRoot != nil{
+            
+            var rootValue = newRoot!.val
+            
+            
+            if pValue < rootValue && qValue < rootValue{
+                newRoot = newRoot!.left
+            }else if pValue > rootValue && qValue > rootValue{
+                newRoot = newRoot!.right
+            }else{
+                return newRoot
+            }                        
+        }
+        
+        return nil
+    }
+}
