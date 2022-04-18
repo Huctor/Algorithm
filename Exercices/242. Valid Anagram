@@ -1,0 +1,63 @@
+https://leetcode.com/problems/valid-anagram/
+
+Solution 1: 两个数组排序, 比较两个数组是否相同
+
+class Solution {
+    func isAnagram(_ s: String, _ t: String) -> Bool {
+        
+        var sArray = Array(s)
+        var tArray = Array(t)
+        
+        var sArraySorted = sArray.sorted()
+        var tArraySorted = tArray.sorted()
+        
+        return sArraySorted == tArraySorted
+        
+    }
+}
+
+Solution 2: 字典, 把第一个字符串每个字母出现的次数存入字典, 第二个字符串依次减少, 最后字典为空则为true
+
+class Solution {
+    func isAnagram(_ s: String, _ t: String) -> Bool {
+        
+        var sArray = Array(s)
+        var tArray = Array(t)
+        
+        if sArray.count != tArray.count{
+            return false
+        }
+      
+        
+        var dic = [Character : Int]()
+        
+        for i in 0...sArray.count - 1{
+            
+            if dic[sArray[i]] == nil{
+                dic[sArray[i]] = 1
+                continue
+            }
+            
+            dic[sArray[i]] = dic[sArray[i]]! + 1  
+        }
+        
+        for i in 0...tArray.count - 1{
+            
+            if dic[tArray[i]] == nil{
+                return false
+            }
+            
+            dic[tArray[i]] = dic[tArray[i]]! - 1  
+            
+            if dic[tArray[i]] == 0{
+                dic[tArray[i]] = nil
+            }
+        }
+        
+        if dic.keys.count == 0{
+            return true
+        }else{
+            return false
+        }
+    }
+}
