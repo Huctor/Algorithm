@@ -1,0 +1,22 @@
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+
+Solution: one pass就可以, 定义一个变量储存最小值, 每个值和这个最小值相减获取差值.
+
+class Solution {
+    func maxProfit(_ prices: [Int]) -> Int {
+        
+        var minValue = Int.max
+        var result = 0
+        
+        for i in 0...prices.count - 1{
+            
+            if prices[i] < minValue{
+                minValue = prices[i]
+            }
+            
+            result = max(result, prices[i] - minValue)                        
+        }
+        
+        return result
+    }
+}
