@@ -4,7 +4,7 @@ extension CFBinaryHeap {
     static func min() -> CFBinaryHeap {
         var callbacks = CFBinaryHeapCallBacks()
         callbacks.compare = { lPtr, rPtr, _ in
-            let (lhs, rhs) = (lPtr!.load(as: Int.self), rPtr!.load(as: Int.self))
+            let (left, right) = (lPtr!.load(as: Int.self), rPtr!.load(as: Int.self))
             if ( left == right ) { return CFComparisonResult.compareEqualTo }
             if ( left > right ) { return CFComparisonResult.compareGreaterThan }
             return CFComparisonResult.compareLessThan     
@@ -15,7 +15,7 @@ extension CFBinaryHeap {
     static func max() -> CFBinaryHeap {
         var callbacks = CFBinaryHeapCallBacks()
         callbacks.compare = { lPtr, rPtr, _ in
-            let (lhs, rhs) = (lPtr!.load(as: Int.self), rPtr!.load(as: Int.self))
+            let (left, right) = (lPtr!.load(as: Int.self), rPtr!.load(as: Int.self))
             if ( left == right ) { return CFComparisonResult.compareEqualTo }
             if ( left > right ) { return CFComparisonResult.compareLessThan }
             return CFComparisonResult.compareGreaterThan     
