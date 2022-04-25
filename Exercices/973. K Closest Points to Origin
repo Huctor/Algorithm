@@ -6,6 +6,12 @@ class Solution {
     
     func kClosest(_ p: [[Int]], _ k: Int) -> [[Int]] {
         
-        return Array(p.sorted { a,b in (a[0]*a[0] + a[1]*a[1]) < (b[0]*b[0] + b[1]*b[1])}[0..<k])
+        var result = p
+        
+        result.sort{ a, b in
+            return (a[0]*a[0] + a[1]*a[1]) < (b[0]*b[0] + b[1]*b[1])
+        }
+        
+        return Array(result[0..<k])
     }
 }
