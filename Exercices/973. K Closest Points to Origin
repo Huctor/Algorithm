@@ -1,0 +1,11 @@
+https://leetcode.com/problems/k-closest-points-to-origin/
+
+Solution: max heap, swift array可以实现排序
+
+class Solution {
+    
+    func kClosest(_ p: [[Int]], _ k: Int) -> [[Int]] {
+        
+        return Array(p.sorted { a,b in (a[0]*a[0] + a[1]*a[1]) < (b[0]*b[0] + b[1]*b[1])}[0..<k])
+    }
+}
