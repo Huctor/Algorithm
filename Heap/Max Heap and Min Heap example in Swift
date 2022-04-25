@@ -23,3 +23,10 @@ extension CFBinaryHeap {
         return CFBinaryHeapCreate(nil, 0, &callbacks, nil)
     }
 }
+
+
+可以考虑Swift array排序
+array.sort{ a, b in
+    return a > b
+}
+        
