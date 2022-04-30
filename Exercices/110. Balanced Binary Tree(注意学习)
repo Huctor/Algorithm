@@ -1,0 +1,48 @@
+https://leetcode.com/problems/balanced-binary-tree/
+
+Solution: 注意以下几点: 
+1 要用带有返回值的递归函数, 高度当做参数的话, 计算完左边, 再计算右边的话高度会自动加1. 
+2 balanced binary tree要注意左右子树(包括小子树), 都必须是balanced binary
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public var val: Int
+ *     public var left: TreeNode?
+ *     public var right: TreeNode?
+ *     public init() { self.val = 0; self.left = nil; self.right = nil; }
+ *     public init(_ val: Int) { self.val = val; self.left = nil; self.right = nil; }
+ *     public init(_ val: Int, _ left: TreeNode?, _ right: TreeNode?) {
+ *         self.val = val
+ *         self.left = left
+ *         self.right = right
+ *     }
+ * }
+ */
+class Solution {
+    func isBalanced(_ root: TreeNode?) -> Bool {
+        
+        var leftHeight = 0
+        var rightHeight = 0
+        
+        if root == nil{
+            return true
+        }
+        
+        leftHeight = getHeight(root!.left)
+        rightHeight = getHeight(root!.right)
+
+        return (abs(leftHeight - rightHeight) <= 1) && isBalanced(root!.left) && isBalanced(root!.right)
+        
+    }
+    
+    func getHeight(_ node : TreeNode?) -> Int{
+        
+        if (node == nil){
+            
+            return -1
+        }
+        
+        return 1 + max(getHeight(node!.left), getHeight(node!.right))
+    }
+}
