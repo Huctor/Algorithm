@@ -1,0 +1,34 @@
+https://leetcode.com/problems/first-bad-version/
+
+Solution: 注意边界条件, 比如while只能用小于而不能用小于等于, 因为小于等于一直成立. while退出之后只会是相等的情况, 因为数字本书除以2之后会选左边小的那位, 左边
+小的加一即为右, 所以只判断左边是否为true即可.
+
+/**
+ * The knows API is defined in the parent class VersionControl.
+ *     func isBadVersion(_ version: Int) -> Bool{}
+ */
+
+class Solution : VersionControl {
+    func firstBadVersion(_ n: Int) -> Int {
+        
+        var start = 1
+        var end = n
+        
+        while start < end{
+            
+            var mid = start + (end - start) / 2
+            
+            if isBadVersion(mid) == true{
+                end = mid
+            }else{
+                start = mid + 1
+            }
+        }
+        
+        if isBadVersion(start){
+            return start
+        }
+        
+        return -1
+    }
+}
