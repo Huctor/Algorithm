@@ -1,0 +1,26 @@
+https://leetcode.com/problems/ransom-note/
+
+Solution:
+
+class Solution {
+    func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
+        
+        var ransomNoteArray = Array(ransomNote)
+        var magazine = Array(magazine)
+        
+        for element in ransomNoteArray{
+            
+            if magazine.contains(element){
+                
+                var index = magazine.index(of: element)
+                magazine.remove(at: index!)
+                continue
+            }
+            
+            return false            
+        }
+        
+        return true
+        
+    }
+}
