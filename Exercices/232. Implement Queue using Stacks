@@ -1,0 +1,61 @@
+https://leetcode.com/problems/implement-queue-using-stacks/
+
+Solution: 注意题目让用两个stack实现queue操作, stack为后进先出, queue为先进先出
+
+class MyQueue {
+    
+    var stackOne:[Int]?
+    var stackTwo:[Int]?
+
+    init() {
+        stackOne = [Int]()
+        stackTwo = [Int]()
+    }
+    
+    func push(_ x: Int) {
+        
+        stackOne!.append(x)
+    }
+    
+    func pop() -> Int {
+         
+        if stackTwo!.isEmpty{
+            moveStackOneToStackTwo()
+        }
+        
+        return stackTwo!.removeLast()
+    }
+    
+    func peek() -> Int {
+        
+        if stackTwo!.isEmpty{
+            moveStackOneToStackTwo()
+        }
+        return (stackTwo!.last as! Int)
+    }
+    
+    func empty() -> Bool {
+        
+        if stackOne!.isEmpty && stackTwo!.isEmpty{
+            return true
+        }
+        
+        return false
+    }
+    
+    func moveStackOneToStackTwo(){
+        
+        while !stackOne!.isEmpty{
+            stackTwo!.append(stackOne!.removeLast())
+        }
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * let obj = MyQueue()
+ * obj.push(x)
+ * let ret_2: Int = obj.pop()
+ * let ret_3: Int = obj.peek()
+ * let ret_4: Bool = obj.empty()
+ */
