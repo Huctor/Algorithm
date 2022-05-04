@@ -1,0 +1,47 @@
+https://leetcode.com/problems/clone-graph/
+
+Solution: 找规律, 新图和旧图唯一共同点就是节点的数字, 因此可以根据这个共同点来创建字典组建新图.注意: queue只储存原图的节点, visited只储存新图的节点.
+
+/**
+ * Definition for a Node.
+ * public class Node {
+ *     public var val: Int
+ *     public var neighbors: [Node?]
+ *     public init(_ val: Int) {
+ *         self.val = val
+ *         self.neighbors = []
+ *     }
+ * }
+ */
+
+class Solution {
+    func cloneGraph(_ node: Node?) -> Node? {
+        
+        if node == nil{
+            return node
+        }
+        //queue只储存原图的节点
+        var queue = [node]
+        //visited只储存新图的节点
+        var visited: [Int : Node] = [:]
+        visited[node!.val] = Node(node!.val)
+        
+        while !queue.isEmpty{
+            
+            var newNode = queue.removeFirst()
+            
+            for neighbor in newNode!.neighbors{
+                
+                if visited[neighbor!.val] == nil{
+                    visited[neighbor!.val] = Node(neighbor!.val)
+                    queue.append(neighbor)
+                }
+                
+                visited[newNode!.val]!.neighbors.append(visited[neighbor!.val]) 
+            }            
+        }
+        
+        return visited[node!.val]        
+        
+    }
+}
