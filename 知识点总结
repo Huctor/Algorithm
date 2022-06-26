@@ -1,6 +1,6 @@
 各个知识点总结:
 
-类型 Two pointers:
+类型 Two pointers
 
 1 Binary Search
 
@@ -61,6 +61,42 @@ https://github.com/Huctor/Algorithm/blob/main/TwoPointers/Linked%20List%20Cycle(
 
 记忆点: 由于是链表, 走一步的和走两步的例子为slow = slow?.next和fast = fast?.next?.next
 另外, while循环的退出条件为fast快指针为空或者fast!.next为空, 意为快指针已经走到的链表末端并没有环
+
+
+类型 LinkedList
+
+1 Reverse Linked List 反转链表
+
+https://github.com/Huctor/Algorithm/blob/main/Exercices/206.%20Reverse%20Linked%20List(Linked%20list)
+
+Iterative解法
+
+流程:
+创建一个新链表头部newHead, 从旧链表中取出一个节点插入新链表头部, 然后再将newHead换到头部即可(即将新插入的节点赋值给newHead).
+注意这里简单赋值即可, 因为节点插入之后已经存在一个新链表在内存中, 由于都是object, 所以只要更新newHead为最新节点即可, 更新newHead
+并不会影响已经在内存中生成的新链表, 只是为了返回需要.
+
+代码思路:
+1 首先把旧链表head第二个值取出来备用, 因为之后要循环, 由此而得来Line 1
+2 把备用值赋给head, 用来继续循环, 由此得来Line 4
+3 把旧链表head添加到新链表头部, 具体做法为把head的next设置为newHead，由此而来Line 2
+4 然后更新newHead的值为head, 以保持newHead始终为新链表的头部, 由此而来Line 3
+
+时间复杂度 O(n)
+空间复杂度 O(1)
+
+记忆点: 更新头部节点, 只需要简单赋值就好, 不会影响已建立的存在在内存中的新链表
+
+Recursive解法
+
+待补充...
+
+
+
+
+
+
+
 
 
 
