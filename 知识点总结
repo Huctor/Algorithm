@@ -30,16 +30,41 @@ https://github.com/Huctor/Algorithm/blob/main/TwoPointers/Sort%20an%20Array(Quic
 
 https://github.com/Huctor/Algorithm/blob/main/TwoPointers/Two%20sum(Two%20pointers%2C%20Dictionary)
 
-使用字典, 用数组元素的值作为字典的key，用index作为字典的value
+使用字典, 用数组元素的值作为字典的key, 用index作为字典的value.
 
 时间复杂度 O(n)
 空间复杂度 O(n)
 
 记忆点: 字典的创建 var dic = [Int:Int]()
 
-4 Sliding windows 返回字符串中最长的非重复部分
+4 Sliding windows 返回字符串中最长的非重复部分长度
 
 https://github.com/Huctor/Algorithm/blob/main/TwoPointers/Longest%20Substring%20Without%20Repeating%20Characters(经典滑动窗口问题sliding%20windows)
+
+使用set记录所有滑过的字符. 需要两个指针同向滑动, 外面一个while循环, 左指针不动, 右指针依次移动(同时set添加右指针滑动的字符), 直到碰到重复的字符(set中是否已包含该字符),
+然后进入一个内层的while循环, 这个内部的while循环中只移动左指针(set同时移除左指针滑动过的字符), 直到左指针找到和右指针相同的字符, 使用break退出内层while循环(set移除和右指针相同的字符
+同时左指针继续移动1个字符). 注意外层while中始终记录右指针和左指针的距离. 如此, 直到右指针移动到字符串末端.
+
+时间复杂度 O(n)
+空间复杂度 O(k) k为set的长度
+
+记忆点: 两个while循环(外层为右指针, 内层为左指针), set用作检查重复字符. set的创建var collections = Set<Character>()
+
+5 Fast and slow pointer 判断一个链表是否是一个环
+
+https://github.com/Huctor/Algorithm/blob/main/TwoPointers/Linked%20List%20Cycle(fast%20and%20slow%20pointer)
+
+一个while循环, 慢指针走一步, 快指针走两步, 有重合则证明有环, 没有重合或者快指针的为nil或者快指针的next为nil则证明没有环.
+
+时间复杂度 O(n)
+空间复杂度 O(1)
+
+记忆点: 由于是链表, 走一步的和走两步的例子为slow = slow?.next和fast = fast?.next?.next
+另外, while循环的退出条件为fast快指针为空或者fast!.next为空, 意为快指针已经走到的链表末端并没有环
+
+
+
+
 
 
 
