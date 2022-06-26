@@ -1,6 +1,6 @@
 https://leetcode.com/problems/linked-list-cycle/
 
-Solution: Swift 满指针走一步, 快指针走两步, 有重合则证明有环, 没有重合或者快指针的为nil或者快指针的next为nil则证明没有坏.
+Solution: Swift 慢指针走一步, 快指针走两步, 有重合则证明有环, 没有重合或者快指针的为nil或者快指针的next为nil则证明没有坏.
 
 /**
  * Definition for singly-linked list.
