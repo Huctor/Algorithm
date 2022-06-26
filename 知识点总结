@@ -2,7 +2,7 @@
 
 类型 Two pointers
 
-1 Binary Search
+1) Binary Search
 
 数组必须是有序的并检查数组是否为空. 用数组的中间数和target比较, 比target小则在左边区域继续寻找, 比target大则在右边区域继续寻找,
 若相等则返回, 否则返回不存在.
@@ -12,7 +12,7 @@
 
 记忆点: 一个while循环, 取中间值操作在while循环中, 因为每次while循环都要选择在左边还是在右边寻找.
 
-2 QuickSort
+2) QuickSort
 
 https://github.com/Huctor/Algorithm/blob/main/TwoPointers/Sort%20an%20Array(QuickSort%2C%20Two%20pointers)
 
@@ -26,7 +26,7 @@ https://github.com/Huctor/Algorithm/blob/main/TwoPointers/Sort%20an%20Array(Quic
 记忆点: 三个while循环, 取中间值在while循环之外,每次调用函数的时候才需要取中间值, while循环内部只需要移动指针.
 函数体内还需要两次再调用函数本身, 依次继续在左右半段继续排序, 直到完成.
 
-3 Two sum 返回数组中两数相加和等于target的下标
+3) Two sum 返回数组中两数相加和等于target的下标
 
 https://github.com/Huctor/Algorithm/blob/main/TwoPointers/Two%20sum(Two%20pointers%2C%20Dictionary)
 
@@ -37,7 +37,7 @@ https://github.com/Huctor/Algorithm/blob/main/TwoPointers/Two%20sum(Two%20pointe
 
 记忆点: 字典的创建 var dic = [Int:Int]()
 
-4 Sliding windows 返回字符串中最长的非重复部分长度
+4) Sliding windows 返回字符串中最长的非重复部分长度
 
 https://github.com/Huctor/Algorithm/blob/main/TwoPointers/Longest%20Substring%20Without%20Repeating%20Characters(经典滑动窗口问题sliding%20windows)
 
@@ -50,7 +50,7 @@ https://github.com/Huctor/Algorithm/blob/main/TwoPointers/Longest%20Substring%20
 
 记忆点: 两个while循环(外层为右指针, 内层为左指针), set用作检查重复字符. set的创建var collections = Set<Character>()
 
-5 Fast and slow pointer 判断一个链表是否是一个环
+5) Fast and slow pointer 判断一个链表是否是一个环
 
 https://github.com/Huctor/Algorithm/blob/main/TwoPointers/Linked%20List%20Cycle(fast%20and%20slow%20pointer)
 
@@ -65,7 +65,7 @@ https://github.com/Huctor/Algorithm/blob/main/TwoPointers/Linked%20List%20Cycle(
 
 类型 LinkedList
 
-1 Reverse Linked List 反转链表
+1) Reverse Linked List 反转链表
 
 https://github.com/Huctor/Algorithm/blob/main/Exercices/206.%20Reverse%20Linked%20List(Linked%20list)
 
