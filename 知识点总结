@@ -14,6 +14,8 @@
 
 2 QuickSort
 
+https://github.com/Huctor/Algorithm/blob/main/TwoPointers/Sort%20an%20Array(QuickSort%2C%20Two%20pointers)
+
 首先检测数组是否为空. 一般采用数组中间数为参照值, 然后在while循环中依次移动左右两个指针, 一个从左边一直移动指针寻找到比参照值大的数(通过while循环), 
 一个从右边一直移动指针寻找到比中间值小的数(通过while循环). 寻找到两个值之后交换, 并依次移动左右两个指针. 最后调用两次quicksort函数本身, 分别对数组
 做半段和右半段进行quicksort排序.
@@ -23,6 +25,33 @@
 
 记忆点: 三个while循环, 取中间值在while循环之外,每次调用函数的时候才需要取中间值, while循环内部只需要移动指针.
 函数体内还需要两次再调用函数本身, 依次继续在左右半段继续排序, 直到完成.
+
+3 Two sum 返回数组中两数相加和等于target的下标
+
+https://github.com/Huctor/Algorithm/blob/main/TwoPointers/Two%20sum(Two%20pointers%2C%20Dictionary)
+
+使用字典, 用数组元素的值作为字典的key，用index作为字典的value
+
+时间复杂度 O(n)
+空间复杂度 O(n)
+
+记忆点: 字典的创建 var dic = [Int:Int]()
+
+4 Sliding windows 返回字符串中最长的非重复部分
+
+https://github.com/Huctor/Algorithm/blob/main/TwoPointers/Longest%20Substring%20Without%20Repeating%20Characters(经典滑动窗口问题sliding%20windows)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
