@@ -107,7 +107,26 @@ https://leetcode.com/problems/01-matrix/
 
 思路:
 
-先将图中所有
+先将图中所有0元素的坐标和count(count为0)放入一个queue中, 同时将处理过的过的坐标存入set中.
+依次取出queue中元素, 分别向上下左右四个反向寻找非0元素或者未处理过的元素(未在set中的), 如果找到则将坐标以及count加1后存入queue中, 并将新坐标添加入set中
+
+宏观逻辑:
+
+可将01问题看成小岛, 比如0的区域为海水, 1的区域为小岛, 算法思路为从海水向内陆依次进入和加1, 这样就可以得到小岛上每个元素里海水的
+
+时间复杂度 O(mn)
+空间复杂度 O(mn)
+
+记忆点: 
+
+创建4个方向 let directions = [[0, 1], [0, -1], [1, 0], [-1, 0]] 
+创建2维矩阵, 注意2维矩阵行列的表示方法
+var matRow = mat.count
+var matCol = mat[0].count
+var matCopy = [[Int]](repeating:[Int](repeating: Int.max, count: matCol), count:matRow)
+
+
+
 
 
 
