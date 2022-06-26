@@ -76,6 +76,13 @@ Iterative解法
 注意这里简单赋值即可, 因为节点插入之后已经存在一个新链表在内存中, 由于都是object, 所以只要更新newHead为最新节点即可, 更新newHead
 并不会影响已经在内存中生成的新链表, 只是为了返回需要.
 
+while inputHead != nil{
+    var next = inputHead!.next //Line 1
+    inputHead!.next = newHead // Line 2
+    newHead = inputHead //Line 3
+    inputHead = next // Line 4
+}
+
 代码思路:
 1 首先把旧链表head第二个值取出来备用, 因为之后要循环, 由此而得来Line 1
 2 把备用值赋给head, 用来继续循环, 由此得来Line 4
