@@ -158,6 +158,36 @@ https://github.com/Huctor/Algorithm/blob/main/BFS/Topological%20Sorting(lintcode
 
 记忆点: 先创建一个入度字典, 计算出所有节点的入度, 再通过依次取出入度为零的节点遍历整张图
 
+类型 DFS
+
+1) Combination Sum 组合
+
+https://github.com/Huctor/Algorithm/blob/main/DFS/Combination%20Sum(DFS%2C%20Recursion)
+
+DFS典型模板
+
+时间复杂度和空间复杂度, 参考 https://leetcode.com/problems/combination-sum/solution/
+通常为2^n
+
+记忆点: 数字可以重复使用, 所以没有用set, 记着填进去, 调用dfs后还要取出来
+
+2) Permutations 排列
+
+https://github.com/Huctor/Algorithm/blob/main/DFS/Permutations(DFS%2C%20Recursion)
+
+DFS典型模板
+
+时间复杂度 O(n!)
+空间复杂度 O(n!)
+
+记忆点: 数字可以重复使用, 所以使用用set, 记着填进去, 调用dfs后还要取出来
+
+
+
+
+
+
+
 
 
 
