@@ -182,6 +182,21 @@ DFS典型模板
 
 记忆点: 数字可以重复使用, 所以使用用set, 记着填进去, 调用dfs后还要取出来
 
+类型 heap top/least K items问题
+
+1) Kth Largest Element in an Array
+
+https://github.com/Huctor/Algorithm/blob/main/Heap/215.%20Kth%20Largest%20Element%20in%20an%20Array
+
+用大堆和小堆这种数据结构来处理, swift中可以使用array的排序来处理
+
+最大堆，所有的父结点都比其子结点要大
+最小堆，所有的父结点都比其子结点要小
+注意堆的顶部是最先被取出的, 所以求Kth最大用小堆, 求Kth最小用大堆
+
+swift可以使用
+
+
 
 
 
