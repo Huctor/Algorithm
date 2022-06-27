@@ -125,6 +125,47 @@ var matRow = mat.count
 var matCol = mat[0].count
 var matCopy = [[Int]](repeating:[Int](repeating: Int.max, count: matCol), count:matRow)
 
+2) Binary Tree Level Order Traversal 二叉树遍历
+
+https://github.com/Huctor/Algorithm/blob/main/BFS/Binary%20Tree%20Level%20Order%20Traversal(BFS)
+
+典型BFS算法模板, 用一个nil来分开每层
+
+时间复杂度 O(mn)
+空间复杂度 O(mn)
+
+记忆点: 记住模板
+
+3) Topological Sorting 拓扑排序
+
+https://github.com/Huctor/Algorithm/blob/main/BFS/Topological%20Sorting(lintcode)
+
+分为两部分: 第一步计算每个点的入度, 第二步把入读为零的点依次取出并减少相邻点的入度直到遍历完
+
+第一个步:
+
+创建一个入度字典, 将每个点作为key, 值设为0(假设每个点的入度为0)
+
+遍历每个点的neighbor, 将入度字典中这个neighbor为key的值加1(因为既然这个点是其他点的neighbor, 那么这个点就有一个入度), 计算每个点的真实入度
+
+第二个步:
+
+将入度为零的点放入queue中, 在while中依次取出. 由于这点已经取出, 所以for循环这个点的所有neighbor,并将所有neighbor的入度减1(入度字典key为neighbor的值减1),
+如果某个neighbor的入度为零, 则将此neighbor放入queue中用于遍历
+
+时间复杂度 O(mn)
+空间复杂度 O(mn)
+
+记忆点: 县创建
+
+
+
+
+
+
+
+
+
 
 
 
