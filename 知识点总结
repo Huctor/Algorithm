@@ -194,7 +194,20 @@ https://github.com/Huctor/Algorithm/blob/main/Heap/215.%20Kth%20Largest%20Elemen
 最小堆，所有的父结点都比其子结点要小
 注意堆的顶部是最先被取出的, 所以求Kth最大用小堆, 求Kth最小用大堆
 
-swift可以使用
+swift可以使用sort来处理
+
+数组依次递减, 作用相当于最小堆
+result.sort{ a, b in
+    return a > b
+}
+
+数组依次增大, 作用相当于最大堆
+result.sort{ a, b in
+    return a > b
+}
+
+时间复杂度 O(nlogn)
+空间复杂度 O(1)
 
 
 
