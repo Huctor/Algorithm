@@ -223,6 +223,29 @@ https://github.com/Huctor/Algorithm/blob/main/Stack/20.%20Valid%20Parentheses
 
 记忆点: 一对字符或者任意形式的成对匹配, 可以考虑采用字典的形式来保证配对.
 
+类型 PrefixTree(字典树)
+
+定义: 每个节点有一个字符和一个bool值, bool值为true则该字母为一个word的结尾字符, 否则为false
+
+首先创建一个节点类TrieNode, 类中包含两个元素: 一个是一个字典用来储存children节点: child节点的值为key, value为TrieNode的对象. 另个一值为bool类型,
+默认值为false, 为单词结尾的时候设为true
+
+注意: 节点类TrieNode只需要包含一个children节点的字典即可, 这种方法比较巧妙, 查找子节点存在与否直接用字典搜索key值即可, 如果包含children的所有节点对象,
+则需要遍历所有children节点对象, 来判断是否存在.
+
+insert: 从root节点开始, 如果root的的children的key中不包含这个字母, 则创建这个子节点并移动到下一个节点(如果包含, 则直接移动到下一个节点), 知道这个单词的每个字母都成为节点, 最后一个节点的bool设为true,
+则一个单词添加完成.
+
+find: 返回input字符串最后一个字符的TrieNode对象, 期间如果某个字母不存在则返回nil
+
+search: 调用find函数, find函数如果返回nil则这个单词不存在, 如果返回TrieNode对象bool值为false, 则这个单词不存在. find函数返回的节点不为空并且bool值为true,
+这个单词才存在
+
+startWith: 调用find函数, find函数返回值不会空, 则存在有这个字符串开头的单词.
+
+记忆点: TrieNode类的创建比较巧妙, 用字典的key的值来表示所有children节点的值, 可以借鉴此思路.
+
+
 
 
 
