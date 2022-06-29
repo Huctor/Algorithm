@@ -209,6 +209,29 @@ result.sort{ a, b in
 时间复杂度 O(nlogn)
 空间复杂度 O(1)
 
+类型 Stack 后进先出
+
+https://github.com/Huctor/Algorithm/blob/main/Stack/20.%20Valid%20Parentheses
+
+创建一个字典, 左半部分符号作为key, 右半部分作为value
+
+如果字符串中的字符为左半部分就添加进stack中, 如果为右半部分, 则要判断stack中的左半部分是否与当前字符为一对,
+如果为一对, 则取出stack中最后一个字符, 否则返回false. 循环结束后要半段stack中是否还有值, 有的话则返回错误.
+
+时间复杂度 O(n)
+空间复杂度 O(n)
+
+记忆点: 一对字符或者任意形式的成对匹配, 可以考虑采用字典的形式来保证配对.
+
+
+
+
+
+
+
+
+
+
 
 
 
