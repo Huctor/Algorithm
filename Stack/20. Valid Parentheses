@@ -1,6 +1,6 @@
 https://leetcode.com/problems/valid-parentheses/
 
-Solution: Swift stack后进先出, 一直放左边到stack, 遇到右边配对则删除stack最新一个.
+Solution: Swift stack后进先出, 一直放左边括号到stack, 遇到右边括号配对则删除stack最新一个.
 
 class Solution {
     func isValid(_ s: String) -> Bool {
