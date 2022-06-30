@@ -245,6 +245,8 @@ startWith: 调用find函数, find函数返回值不会空, 则存在有这个字
 
 记忆点: TrieNode类的创建比较巧妙, 用字典的key的值来表示所有children节点的值, 可以借鉴此思路.
 
+类型 UnionFind
+
 
 
 
