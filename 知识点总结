@@ -247,6 +247,91 @@ startWith: 调用find函数, find函数返回值不会空, 则存在有这个字
 
 类型 UnionFind
 
+https://github.com/Huctor/Algorithm/blob/main/UnionFind/Accounts%20Merge
+
+需要做更多的题来寻找规律, 大致规律如下:
+
+1 将每个节点设置为自己的root父节点.
+2 写union函数, 将第一个参数的root父节点设置为第二个参数的root父节点. 用处是将同一组数据的的root节点统一.
+3 写find函数,找到并返回参数的root父节点.
+
+记忆点: 利用字典的特性来合并相容的内容:
+
+步骤逻辑与例子:  
+
+[
+["John","johnsmith@mail.com","john_newyork@mail.com"],
+["John","johnsmith@mail.com","john00@mail.com"],
+["Mary","mary@mail.com"],
+["John","johnnybravo@mail.com"]
+]
+
+第一步:
+
+将每个邮箱设为自己的父节点
+
+1 father[johnsmith@mail.com] = johnsmith@mail.com
+2 father[john_newyork@mail.com] = john_newyork@mail.com
+3 father [johnsmith@mail.com] = johnsmith@mail.com
+4 father [john00@mail.com] = john00@mail.com
+5 father [mary@mail.com] = mary@mail.com
+6 father [johnnybravo@mail.com] = johnnybravo@mail.com
+
+通过这步, 利用字典的特性, 把来自不同email组的相同email合并到一个字典里
+
+1 father[johnsmith@mail.com] = johnsmith@mail.com
+2 father[john_newyork@mail.com] = john_newyork@mail.com
+3 father [john00@mail.com] = john00@mail.com
+4 father [mary@mail.com] = mary@mail.com
+5 father [johnnybravo@mail.com] = johnnybravo@mail.com
+
+
+
+同时给每个email组里的每个email设置一个联系人并放入一个字典:
+
+1 name[johnsmith@mail.com] = John
+2 name[john_newyork@mail.com] = John
+3 name [johnsmith@mail.com] = John
+4 name [john00@mail.com] = John
+5 name [mary@mail.com] = Mary
+6 name [johnnybravo@mail.com] = John
+
+通过这步, 利用字典的特性,不同组里的相同email设置为同样的联系人:
+
+1 name[johnsmith@mail.com] = John
+2 name[john_newyork@mail.com] = John
+3 name [john00@mail.com] = John
+4 name [mary@mail.com] = Mary
+5 name [johnnybravo@mail.com] = John
+
+
+第二步:
+
+将email组里的每个email的father设置为第一个email
+
+find function: 找到value的root父节点,  此处有压缩, 意思为直接设置root父节点, 而不是其上一个节点
+
+union function: 将第一个参数的root父节点设置为第二个参数的root父节点
+
+father[john_newyork@mail.com] = johnsmith@mail.com
+
+
+第三步:
+
+组件新的字典dic, key为root父节点, value为此父节点下的所有子节点
+
+另外,  此处有find函数例子 :
+
+father[johnsmith@mail.com] is johnsmith@mail.com
+value is johnsmith@mail.com
+
+第四步:
+
+通过name字典和dic字典组成答案
+
+
+
+
 
 
 
