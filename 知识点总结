@@ -253,9 +253,9 @@ https://github.com/Huctor/Algorithm/blob/main/UnionFind/Accounts%20Merge
 
 1 将每个节点设置为自己的root父节点.
 2 写union函数, 将第一个参数的root父节点设置为第二个参数的root父节点. 用处是将同一组数据的的root节点统一.
-3 写find函数,找到并返回参数的root父节点.
+3 写find函数, 找到并返回参数的root父节点.
 
-记忆点: 利用字典的特性来合并相容的内容:
+记忆点: 利用字典的特性来合并相容的内容. 注意union函数是两个root节点相互合并(合并分支), find函数找的也是root父节点.
 
 步骤逻辑与例子:  
 
@@ -285,8 +285,6 @@ https://github.com/Huctor/Algorithm/blob/main/UnionFind/Accounts%20Merge
 4 father [mary@mail.com] = mary@mail.com
 5 father [johnnybravo@mail.com] = johnnybravo@mail.com
 
-
-
 同时给每个email组里的每个email设置一个联系人并放入一个字典:
 
 1 name[johnsmith@mail.com] = John
@@ -303,7 +301,6 @@ https://github.com/Huctor/Algorithm/blob/main/UnionFind/Accounts%20Merge
 3 name [john00@mail.com] = John
 4 name [mary@mail.com] = Mary
 5 name [johnnybravo@mail.com] = John
-
 
 第二步:
 
@@ -328,6 +325,15 @@ value is johnsmith@mail.com
 第四步:
 
 通过name字典和dic字典组成答案
+
+以上例子过于简单, 改为一下例子将出现合并两个分支的情况:
+
+[
+["John"," john_newyork@mail.com", "johnsmith@mail.com "],
+["John"," john00@mail.com", "johnsmith@mail.com "],
+["Mary","mary@mail.com"],
+["John","johnnybravo@mail.com"]
+]
 
 
 
