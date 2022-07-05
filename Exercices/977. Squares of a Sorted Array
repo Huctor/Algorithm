@@ -1,0 +1,20 @@
+https://leetcode.com/problems/squares-of-a-sorted-array/
+
+Solution:
+
+class Solution {
+    func sortedSquares(_ nums: [Int]) -> [Int] {
+        
+        var result = [Int]()
+        
+        for i in nums {
+            
+            var temp = i * i
+            result.append(temp)
+            
+        }
+        
+        return result.sorted()
+                
+    }
+}
