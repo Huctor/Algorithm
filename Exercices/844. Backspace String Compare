@@ -1,0 +1,43 @@
+https://leetcode.com/problems/backspace-string-compare/
+
+Solution:
+
+class Solution {
+    func backspaceCompare(_ s: String, _ t: String) -> Bool {
+        
+        var firstPointer = 0
+        var secondPointer = 0
+        var sArray = Array(s)
+        var tArray = Array(t)
+        
+        var sResult = [Character]()
+        var tResult = [Character]()
+        
+        for i in sArray {
+            if i == "#" {
+                if sResult.count >= 1 {
+                    sResult.removeLast()
+                }
+            }else {
+                sResult.append(i)
+            }
+        }
+        
+        for i in tArray {
+            if i == "#" {
+                if tResult.count >= 1 {
+                    tResult.removeLast()
+                }
+            }else {
+                tResult.append(i)
+            }
+        }
+        
+        if sResult == tResult {
+            return true
+        }
+        
+        return false
+        
+    }
+}
