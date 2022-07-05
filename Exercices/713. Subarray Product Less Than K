@@ -1,0 +1,38 @@
+https://leetcode.com/problems/subarray-product-less-than-k/
+
+Solution: sliding windows做法, 区间内的有效解个数为right - left + 1
+
+注意: 需要通过while循环来决定left指针移动多少
+
+时间复杂度: O(n)
+空间复杂度: O(1)
+
+class Solution {
+    func numSubarrayProductLessThanK(_ nums: [Int], _ k: Int) -> Int {
+        
+        if k <= 1 {
+            return 0
+        }
+        
+        var left = 0
+        var right = 0
+        
+        var result = 0
+        var production = 1
+        
+        while right <= nums.count - 1 {
+            
+            production = production * nums[right]
+            
+            while (production >= k) {
+                production = production / nums[left]
+                left += 1
+            }
+            
+            result += right - left + 1
+            right += 1
+        }
+        
+        return result        
+    }
+}
