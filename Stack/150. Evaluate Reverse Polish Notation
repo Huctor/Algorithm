@@ -1,0 +1,39 @@
+https://leetcode.com/problems/evaluate-reverse-polish-notation/
+
+Solution: 用stack来做, 规律为: 碰到一个操作符, 则将该操作符前两个数字进行操作, 操作之后放回stack中, 继续直到遍历完字符串.
+
+class Solution {
+    func evalRPN(_ tokens: [String]) -> Int {
+        
+        var stack = [Int]()
+        
+        for token in tokens {
+            
+            if let value = Int(token) { //判断是否为数字
+                stack.append(value)
+            } else {
+                
+                var numberRight = stack.removeLast()
+                var numberLeft = stack.removeLast()
+                var sum = 0
+                
+                switch token {
+                    case "+":
+                        sum = numberLeft + numberRight
+                    case "-":
+                        sum = numberLeft - numberRight
+                    case "*":
+                        sum = numberLeft * numberRight
+                    case "/":
+                        sum = numberLeft / numberRight
+                    default: 
+                        return 0
+                }
+                
+                stack.append(sum)
+            }            
+        }
+        
+        return stack[0]
+    }
+}
