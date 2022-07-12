@@ -1,0 +1,41 @@
+https://leetcode.com/problems/coin-change/
+
+Solution: DFS超时
+
+class Solution {
+    func coinChange(_ coins: [Int], _ amount: Int) -> Int {
+        
+        var level = [Int]()
+        var result = Int.max
+        var newAmount = amount
+        dfs(coins, &level, newAmount, &result)
+        
+        if result == Int.max {
+            return -1
+        }
+        
+        return result
+    }
+    
+    func dfs(_ coins: [Int], _ level: inout [Int], _ amount: Int, _ result: inout Int) {
+
+        if amount < 0 {
+            return
+        }
+        
+        if amount == 0 {
+            if result > level.count {
+                result = level.count
+            }
+            
+            return
+        }
+        
+        for coin in coins {
+            level.append(coin)
+            dfs(coins, &level, amount - coin, &result)
+            level.removeLast()
+        }
+        
+    }
+}
