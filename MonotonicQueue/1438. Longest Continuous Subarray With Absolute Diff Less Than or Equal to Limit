@@ -1,0 +1,48 @@
+https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/
+
+Solution: 两个单调队列, 一个递减, 一个递增, 内部第三个while循环中移动左指针保持合法窗口sliding windows
+
+class Solution {
+    func longestSubarray(_ nums: [Int], _ limit: Int) -> Int {
+        
+        var left = 0
+        var right = 0
+        var result = 0
+        
+        var minQueue = [Int]()
+        var maxQueue = [Int]()
+        
+        while right < nums.count {
+            
+            while minQueue.count > 0 && minQueue.last! < nums[right] {
+                minQueue.removeLast()
+            }
+            
+            while maxQueue.count > 0 && maxQueue.last! > nums[right] {
+                maxQueue.removeLast()
+            }
+            
+            minQueue.append(nums[right])
+            maxQueue.append(nums[right])
+            
+            while minQueue.first! - maxQueue.first! > limit {
+                
+                if nums[left] == minQueue.first {
+                    minQueue.removeFirst()
+                }
+                
+                if nums[left] == maxQueue.first {
+                    maxQueue.removeFirst()
+                }
+                
+                left += 1
+            }
+            
+            result = max(result, right - left + 1)
+            
+            right += 1
+        }
+        
+        return result
+    }
+}
