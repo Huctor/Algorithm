@@ -1,0 +1,25 @@
+https://leetcode.com/problems/subsets/
+
+Solution: 注意用 ..< 的时候, index比nums.count大不会崩溃, 用...的时候, index比nums.count大则会崩溃
+
+class Solution {
+    func subsets(_ nums: [Int]) -> [[Int]] {
+        
+        var result = [[Int]]()
+        var level = [Int]()
+        dfs(nums, &result, &level, 0)  
+        
+        return result
+    }
+    
+    func dfs(_ nums: [Int], _ result: inout [[Int]], _ level: inout[Int], _ index: Int) {
+        
+        result.append(level)
+        
+        for i in index ..< nums.count  {
+            level.append(nums[i])
+            dfs(nums, &result, &level, i + 1)
+            level.removeLast()
+        }   
+    }
+}
