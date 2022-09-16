@@ -1,41 +1,33 @@
 https://leetcode.com/problems/coin-change/
 
-Solution: DFS超时
+Solution: 动态规划, 自底向上(bottom up), 先创建长度为amount+1的一维数组[0, -1, -1, -1....-1],然后根据dp[i],求出dp[i+c]
 
 class Solution {
     func coinChange(_ coins: [Int], _ amount: Int) -> Int {
+        var dp = [Int](repeating: -1, count: amount + 1)
+        dp[0] = 0
         
-        var level = [Int]()
-        var result = Int.max
-        var newAmount = amount
-        dfs(coins, &level, newAmount, &result)
-        
-        if result == Int.max {
-            return -1
-        }
-        
-        return result
-    }
-    
-    func dfs(_ coins: [Int], _ level: inout [Int], _ amount: Int, _ result: inout Int) {
-
-        if amount < 0 {
-            return
-        }
-        
-        if amount == 0 {
-            if result > level.count {
-                result = level.count
-            }
+        for i in 0 ... amount {
             
-            return
+            if dp[i] == -1 {
+                continue
+            }
+
+            for c in coins {
+                
+                if i + c <= amount {
+                    
+                    if dp[i + c] == -1 {
+                        dp[i + c] = dp[i] + 1
+                    } else {
+                        dp[i + c] = min(dp[i + c], dp[i] + 1)
+                    }
+                }
+                                
+            }
         }
         
-        for coin in coins {
-            level.append(coin)
-            dfs(coins, &level, amount - coin, &result)
-            level.removeLast()
-        }
+        return dp[amount]
         
     }
 }
