@@ -1,0 +1,26 @@
+https://leetcode.com/problems/product-of-array-except-self/
+
+Solution: 规律为i的结果可以看做i左边所有乘积乘以i右边的所有乘积, 因此可以分为左遍历数组和右遍历数组.
+
+class Solution {
+    func productExceptSelf(_ nums: [Int]) -> [Int] {
+        
+        var left = [Int](repeating: 1, count: nums.count)
+        var right = [Int](repeating: 1, count: nums.count)
+        var answer = [Int](repeating: 1, count: nums.count)
+        
+        for i in 1 ... (nums.count - 1) {
+            left[i] = nums[i - 1] * left[i - 1]
+        }
+        
+        for j in (0 ... (nums.count - 2)).reversed() {
+            right[j] = nums[j + 1] * right[j + 1]
+        }
+        
+        for k in 0 ... (nums.count - 1) {
+            answer[k] = left[k] * right[k]
+        }
+        
+        return answer
+    }
+}
