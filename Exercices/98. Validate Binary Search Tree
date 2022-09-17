@@ -1,0 +1,60 @@
+https://leetcode.com/problems/validate-binary-search-tree/
+
+Solution: 左子树更新最大值, 右子树更新最小值. 解题方法参考leetcode官方视频.
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public var val: Int
+ *     public var left: TreeNode?
+ *     public var right: TreeNode?
+ *     public init() { self.val = 0; self.left = nil; self.right = nil; }
+ *     public init(_ val: Int) { self.val = val; self.left = nil; self.right = nil; }
+ *     public init(_ val: Int, _ left: TreeNode?, _ right: TreeNode?) {
+ *         self.val = val
+ *         self.left = left
+ *         self.right = right
+ *     }
+ * }
+ */
+class Solution {
+    func isValidBST(_ root: TreeNode?) -> Bool {
+        
+        var queue = [(TreeNode, Int, Int)]()
+        
+        queue.append((root!, Int.max, Int.min))
+        
+        while !queue.isEmpty {
+            
+            var element = queue.removeFirst()
+            
+            var node = element.0
+            var max = element.1
+            var min = element.2
+            
+            if node.val <= min || node.val >= max {
+                return false
+            }
+            
+            if let left = node.left {
+                if left.val > node.val {
+                    return false
+                } else {
+                    queue.append((node.left!, node.val, min))
+                }
+            }
+            
+            if let right = node.right {
+                if right.val < node.val {
+                    return false
+                } else {
+                    queue.append((node.right!, max, node.val))
+                }
+            }
+            
+        }
+        
+        return true
+        
+    }
+}
