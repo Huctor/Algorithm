@@ -1,0 +1,56 @@
+https://leetcode.com/problems/min-stack/
+
+Solution: 用两个stack, 一个存储数据, 一个存储在最小值
+
+class MinStack {
+    
+    var minStack = [Int]()
+    var dataStack = [Int]()
+
+    init() {
+        
+    }
+    
+    func push(_ val: Int) {
+        dataStack.append(val)
+        
+        if minStack.isEmpty {
+            minStack.append(val)
+        } else {
+            if minStack.last! >= val {
+                minStack.append(val)
+            }
+        }
+    }
+    
+    func pop() {
+        
+        if dataStack.isEmpty {
+            return
+        }
+        
+        var popElement = dataStack.removeLast()
+        if minStack.last == popElement {
+            minStack.removeLast()
+        }
+    }
+    
+    func top() -> Int {
+        
+        return dataStack.last!
+    }
+    
+    func getMin() -> Int {
+        
+        return minStack.last!
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * let obj = MinStack()
+ * obj.push(val)
+ * obj.pop()
+ * let ret_3: Int = obj.top()
+ * let ret_4: Int = obj.getMin()
+ */
