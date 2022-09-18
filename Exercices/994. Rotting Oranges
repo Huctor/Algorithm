@@ -1,0 +1,73 @@
+https://leetcode.com/problems/rotting-oranges/
+
+Solution: BFS
+
+class Solution {
+    func orangesRotting(_ grid: [[Int]]) -> Int {
+        
+        var rottenOranges = [[Int]]()
+        var collections = [[Int]]()
+        var numRottenOranges = 0
+        var numOranges = 0
+        var step = 0
+        
+        for i in 0 ... (grid.count - 1) {
+            for j in 0 ... (grid[0].count - 1) {
+                
+                if grid[i][j] > 0 {
+                    
+                    numOranges += 1
+                    if grid[i][j] == 2 {
+                        numRottenOranges += 1
+                        rottenOranges.append([i, j])
+                        collections.append([i, j])
+                    }
+                }   
+            }
+        }
+        
+        if numRottenOranges == numOranges {
+            return 0
+        }
+        
+        rottenOranges.append([-2, -2])
+        
+        var directions = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+        
+        while !rottenOranges.isEmpty {
+            
+            var element = rottenOranges.removeFirst()
+            
+            var x = element[0]
+            var y = element[1]
+            
+            if x == -2 && y == -2 {
+                step += 1
+                if !rottenOranges.isEmpty {
+                    rottenOranges.append([-2, -2])
+                }
+                continue
+            }
+            
+            for direction in directions {
+                
+                var xNext = x + direction[0]
+                var yNext = y + direction[1]
+                
+                if xNext >= 0 && xNext < grid.count && yNext >= 0 && yNext < grid[0].count && !collections.contains([xNext, yNext]) {
+                    if grid[xNext][yNext] == 1 {
+                        numRottenOranges += 1
+                        rottenOranges.append([xNext, yNext])
+                        collections.append([xNext, yNext])
+                    }
+                }                  
+            }             
+        }
+        
+        if numRottenOranges == numOranges {
+            return step - 1
+        } else {
+            return -1
+        }
+    }
+}
