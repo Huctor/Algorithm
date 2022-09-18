@@ -1,0 +1,63 @@
+https://leetcode.com/problems/number-of-islands/
+
+Solution: BFS
+
+class Solution {
+    func numIslands(_ grid: [[Character]]) -> Int {
+        
+        var collection = Set<[Int]>()
+        var queue = [[Int]]()
+        var collectionSteped = Set<[Int]>()
+        var numIslands = 0
+        
+        for i in 0 ... (grid.count - 1) {
+            for j in 0 ... (grid[0].count - 1) {
+                
+                if grid[i][j] == "1" {
+                    collection.insert([i, j])
+                }                
+            }
+        }
+        
+        var direction = [(0, 1), (0, -1), (-1, 0), (1, 0)]
+        
+        if collection.count <= 0 {
+            return 0
+        } else {
+            numIslands = 1
+        }
+        
+        queue.append(collection.first!)
+        collectionSteped.insert(collection.first!)
+        collection.removeFirst()
+        
+        while !queue.isEmpty {
+            
+            var element = queue.removeFirst()
+            var x = element[0]
+            var y = element[1]
+            
+            for elementNext in direction {
+                var xNext = x + elementNext.0
+                var yNext = y + elementNext.1
+                
+                if (xNext >= 0) && (xNext < grid.count) && (yNext >= 0) && (yNext < grid[0].count) && !collectionSteped.contains([xNext, yNext]) {
+                    if grid[xNext][yNext] == "1" {
+                        queue.append([xNext, yNext])
+                        collectionSteped.insert([xNext, yNext])
+                        collection.remove([xNext, yNext])
+                    }
+                }
+            }
+            
+            if queue.isEmpty && !collection.isEmpty {
+                numIslands += 1
+                queue.append(collection.first!)
+                collection.removeFirst()
+            }          
+        }
+        
+        return numIslands
+        
+    }
+}
