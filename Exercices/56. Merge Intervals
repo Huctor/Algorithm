@@ -1,0 +1,33 @@
+https://leetcode.com/problems/merge-intervals/
+
+Solution: 现根据区间最左边排序
+
+class Solution {
+    func merge(_ intervals: [[Int]]) -> [[Int]] {
+        
+        var intervalsSorted = intervals.sorted(by : {a, b in a[0] < b[0]})
+        
+        var result = [[Int]]()
+        
+        for i in 0 ... (intervalsSorted.count - 1) {
+            
+            if result.isEmpty {
+                result.append(intervalsSorted[i])
+                continue
+            }
+            
+            var lastElement = result.removeLast()
+            
+            if lastElement[1] >= intervalsSorted[i][0] {
+                lastElement[1] = max(lastElement[1], intervalsSorted[i][1])
+                result.append(lastElement)
+            } else {
+                result.append(lastElement)
+                result.append(intervalsSorted[i])
+            }    
+        }
+        
+        return result
+        
+    }
+}
