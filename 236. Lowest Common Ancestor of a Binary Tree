@@ -1,0 +1,44 @@
+https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
+
+Solution: DFS
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public var val: Int
+ *     public var left: TreeNode?
+ *     public var right: TreeNode?
+ *     public init(_ val: Int) {
+ *         self.val = val
+ *         self.left = nil
+ *         self.right = nil
+ *     }
+ * }
+ */
+
+class Solution {
+    var ans = TreeNode()
+    func lowestCommonAncestor(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
+        
+        dfs(root, p, q)
+        
+        return ans
+        
+    }
+    
+    func dfs(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> Bool {
+        
+        if root == nil {
+            return false
+        }
+        
+        var left = dfs(root!.left, p, q)
+        var right = dfs(root!.right, p, q)
+        
+        if (left && right) || ((root!.val == p!.val || root!.val == q!.val) && (left || right)) {
+            ans = root!
+        }
+        
+        return left || right || ((root!.val == p!.val) || (root!.val == q!.val))
+    }
+}
