@@ -203,7 +203,7 @@ result.sort{ a, b in
 
 数组依次增大, 作用相当于最大堆
 result.sort{ a, b in
-    return a > b
+    return a < b
 }
 
 时间复杂度 O(nlogn)
