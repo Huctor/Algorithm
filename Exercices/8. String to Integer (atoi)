@@ -1,0 +1,40 @@
+https://leetcode.com/problems/string-to-integer-atoi/description/
+
+class Solution {
+    func myAtoi(_ s: String) -> Int {
+
+        let str = s.trimmingCharacters(in: .whitespaces)
+
+        if str.isEmpty {
+            return 0
+        }
+
+        var sign = 1
+        var result = 0
+        var i = str.startIndex
+        
+        while str[i] == " "{
+            i = str.index(after: i)
+        }
+
+        if str[i] == "+" || str[i] == "-"{
+            sign = str[i] == "-" ? -1 : 1
+            i = str.index(after: i)
+        }
+
+        while i < str.endIndex, str[i].isNumber{
+
+            let digit = Int(String(str[i]))!
+
+            if result > (Int(Int32.max) - digit) / 10 { //重点记忆: 结果乘以10在加下一位的反操作判断是否越界Int32.max或者Int32.min
+                    return sign == 1 ? Int(Int32.max) : Int(Int32.min)
+                }
+
+                result = result*10 + digit //重点记忆:结果乘以10在加下一位
+                i = str.index(after: i)
+
+        }
+
+        return sign*result
+    }
+}
