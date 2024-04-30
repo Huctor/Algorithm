@@ -41,3 +41,28 @@ class Solution {
         
     }
 }
+
+Solution as above, but more clear
+
+class Solution {
+    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+        
+        if nums.count < 2{
+            return []
+        }
+        var dic = [Int: Int]()
+        
+        for (index, value) in nums.enumerated(){
+         
+         if dic[target - value] != nil{
+                if let indexResult = dic[target - value]{
+                    return [indexResult, index]
+                }
+            }
+            
+            dic[value] = index
+        }
+
+        return []
+    }
+}
