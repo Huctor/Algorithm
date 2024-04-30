@@ -61,3 +61,56 @@ class Solution {
         }
     }
 }
+
+Solution 3:
+
+class Solution {
+    func isAnagram(_ s: String, _ t: String) -> Bool {
+
+        if s.count != t.count{
+            return false
+        }
+        
+        var i = s.startIndex
+        var sDic = [Character: Int]()
+
+        while i < s.endIndex
+        {
+             if sDic[s[i]] == nil{
+                sDic[s[i]] = 1
+             }else{
+                if let count = sDic[s[i]]{
+                    sDic[s[i]] = count + 1
+                }
+             }
+
+             i = s.index(after: i)
+        }
+
+        var j = t.startIndex
+
+        while j < t.endIndex{
+            
+            if sDic[t[j]] == nil{
+                return false
+             }else{
+                if let count = sDic[t[j]]{
+                    sDic[t[j]] = count - 1
+                }
+             }
+
+             j = t.index(after: j)
+        }
+        print(sDic)
+        for key in sDic.keys{
+
+            if let count = sDic[key]{
+                if count > 0{
+                    return false
+                }
+            }
+        }
+
+        return true 
+    }
+}
