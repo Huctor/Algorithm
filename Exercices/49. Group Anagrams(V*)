@@ -17,3 +17,40 @@ class Solution:
                 dic[wordSorted] = [word]
         
         return list(dic.values())
+
+Swift solution:
+
+class Solution {
+    func groupAnagrams(_ strs: [String]) -> [[String]] {
+
+        if strs.count == 0{
+            return []
+        }
+
+        var result = [[String]]()
+
+        if strs.count == 1{
+            result.append([strs[0]])
+            return result
+        }
+
+        var dic = [String: [String]]()
+
+        for str in strs{
+
+            var str_temp = str.sorted()
+            
+            if dic[String(str_temp)] == nil{
+                dic[String(str_temp)] = [str]
+            }else{
+                dic[String(str_temp)]!.append(str)
+            }
+        }
+
+        for key in dic.keys{
+            result.append(dic[key]!)
+        }
+        
+        return result
+    }
+}
