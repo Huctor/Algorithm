@@ -1,0 +1,35 @@
+https://leetcode.com/problems/top-k-frequent-elements/description/
+
+class Solution {
+    func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
+        
+        var dic = [Int: Int]()
+        var result = [Int]()
+
+        for num in nums{
+
+            if dic[num] == nil{
+                dic[num] = 1
+            }else{
+                dic[num] = dic[num]! + 1
+            }
+        }
+
+        var dicSorted = dic.sorted{ $0.1 > $1.1}
+
+        var i = 0
+
+        for (key, value) in dicSorted{
+
+            if i == k{
+                break
+            }
+
+            result.append(key)
+
+            i += 1
+        }
+
+        return result
+    }
+}
