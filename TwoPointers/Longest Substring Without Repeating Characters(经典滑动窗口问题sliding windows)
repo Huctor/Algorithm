@@ -63,4 +63,42 @@ class Solution {
         return result
     }
 }
+
+Solution: String.index
+
+class Solution {
+    func lengthOfLongestSubstring(_ s: String) -> Int {
+        
+        var left = s.startIndex
+        var right = s.startIndex
+        var result = 0
+
+        var collection = Set<Character>()
+
+        while right < s.endIndex{
+
+            if collection.contains(s[right]){
+
+                while left <= right{
+
+                    if s[left] == s[right]{
+                        left = s.index(after:left)
+                        break
+                    }
+
+                    collection.remove(s[left])
+                    left = s.index(after:left)
+                }
+
+            }
+
+            result = max(result, s.distance(from: s.startIndex, to: right) - s.distance(from: s.startIndex, to: left) + 1)
+
+            collection.insert(s[right])
+            right = s.index(after: right)
+        }
+
+        return result
+    }
+}
       
