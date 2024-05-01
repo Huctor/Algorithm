@@ -1,0 +1,48 @@
+https://leetcode.com/problems/3sum/description/
+
+class Solution {
+    func threeSum(_ nums: [Int]) -> [[Int]] {
+
+        var newNums = nums
+
+        newNums.sort{a, b in
+            a < b
+        }
+
+        var current = [Int]()
+        var result = [[Int]]()
+        
+        for i in 0..<newNums.count{
+
+            if i > 0 && newNums[i] == newNums[i-1]{
+                continue
+            }
+
+            current.removeAll()
+            current.append(newNums[i])
+            var left = i + 1
+            var right = newNums.count - 1
+
+            while left < right{
+
+                if newNums[left] + newNums[right] > 0 - newNums[i]{
+                    right -= 1
+                }else if newNums[left] + newNums[right] < 0 - newNums[i]{
+                    left += 1
+                }else{
+                    current.append(newNums[left])
+                    current.append(newNums[right])
+                    result.append(current)
+                    current.removeLast()
+                    current.removeLast()
+                    left += 1
+                    while left < right && newNums[left] == newNums[left-1]{
+                        left += 1
+                    }
+                }
+            }
+        }
+
+        return result
+    }
+}
