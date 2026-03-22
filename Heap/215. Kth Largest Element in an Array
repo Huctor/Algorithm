@@ -76,3 +76,43 @@ class Solution {
         
     }
 }
+
+Solution 3: quick select
+
+class Solution {
+    func findKthLargest(_ nums: [Int], _ k: Int) -> Int {
+        var nums = nums
+        var target = nums.count-k
+        var left = 0
+        var right = nums.count - 1
+        return recurse(nums: &nums, target: target, left: &left, right: &right)
+    }
+
+    func recurse(nums: inout [Int], target: Int, left: inout Int, right: inout Int) -> Int {
+        var pivot = nums[right]
+        var i = left
+        for j in left ..< right {
+            
+            if nums[j] < pivot {
+                var temp = nums[i]
+                nums[i] = nums[j]
+                nums[j] = temp
+                i += 1
+            }
+        }
+
+        var temp = nums[i]
+        nums[i] = nums[right]
+        nums[right] = temp
+
+        if i == target {
+            return nums[i]
+        } else if i < target {
+            var left = i+1
+            return recurse(nums: &nums, target: target, left: &left, right: &right)
+        } else {
+            var right = i-1
+            return recurse(nums: &nums, target: target, left: &left, right: &right)
+        }
+    }
+}
